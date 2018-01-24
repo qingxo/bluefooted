@@ -1,0 +1,24 @@
+.main-content {
+  height: 100%;
+}
+
+.main-layout {
+  padding-top: 70px;
+  .main-side-layout {
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  .main-content-layout {
+    padding-left: 220px;
+  }
+}
+
+:host ::ng-deep .logo {
+  width: 120px;
+  height: 31px;
+  background: #333;
+  border-radius: 6px;
+  margin: 16px 28px 16px 0;
+  float: left;
+}

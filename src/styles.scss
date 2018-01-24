@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body,
+{
+  height: 100%;
+  a,
+  li {
+    outline: none;
+  }
+  .ant-menu-submenu>.ant-menu {
+    background-color: #c7c7c7;
+  }
+  .ant-menu-submenu-title,
+  .ant-menu-inline .ant-menu-submenu-title {
+    color: white;
+  }
+}
