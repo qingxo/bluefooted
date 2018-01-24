@@ -1,0 +1,33 @@
+.tabs-info {
+  background-color: #EBEDF3;
+  .noShow {
+    display: none!important;
+  }
+  .ant-tabs-bar {
+    padding: 10px 10px 0;
+    border-color: #3D70E4;
+  }
+  .ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab {
+    min-width: 120px;
+    margin-right: 5px;
+    padding-right: 26px;
+    padding-left: 10px;
+    background: #F3F6FB;
+    border-color: #CCCCCC;
+    color: #767E94;
+    &:hover {
+      color: #2E5EE9;
+    }
+  }
+  .ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab-active {
+    background-color: #fff;
+    border-color: #2E5EE9;
+    color: #2E5EE9;
+  }
+  .ant-tabs-nav .ant-tabs-tab .anticon {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    margin-right: 0;
+  }
+}

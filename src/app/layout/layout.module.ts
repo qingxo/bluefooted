@@ -7,6 +7,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { IndexComponent } from './index/index.component';
 import { PatientsComponent } from './patients/patients.component';
+import { PatientsSearchComponent } from './patients-search/patients-search.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,6 @@ import { PatientsComponent } from './patients/patients.component';
     SharedModule,
     LayoutRoutingModule
   ],
-  declarations: [LayoutComponent, IndexComponent, PatientsComponent]
+  declarations: [LayoutComponent, IndexComponent, PatientsComponent, PatientsSearchComponent]
 })
 export class LayoutModule { }

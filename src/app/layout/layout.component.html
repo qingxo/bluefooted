@@ -6,9 +6,20 @@
   <app-head-line></app-head-line>
   <nz-layout style="min-height:100%;" class="main-layout">
     <nz-sider [nzWidth]="200" style="background:#fff ;" class="main-side-layout">
+
       <ul nz-menu [nzMode]="'inline'" style="height:100%;  background-color: rgba(59, 56, 56, 0.933);
       ">
-        <li nz-submenu>
+        <li nz-submenu *ngFor="let item of menu">
+          <span title>
+            <i class="anticon acticon-user">{{item.name}}</i>
+          </span>
+          <ul *ngIf="item.child.length>0">
+            <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}">
+              {{cc.name}}
+            </li>
+          </ul>
+        </li>
+        <!-- <li nz-submenu>
           <span title>
             <i class="anticon anticon-user"></i>subnav 1</span>
           <ul>
@@ -37,23 +48,13 @@
             <li nz-menu-item>option11</li>
             <li nz-menu-item>option12</li>
           </ul>
-        </li>
-
-        <li nz-submenu>
-          <span title>
-            <i class="anticon anticon-notification"></i>subnav 4</span>
-          <ul>
-            <li nz-menu-item>option13</li>
-            <li nz-menu-item>option14</li>
-            <li nz-menu-item>option15</li>
-            <li nz-menu-item>option16</li>
-          </ul>
-        </li>
+        </li> -->
       </ul>
     </nz-sider>
     <nz-layout class="main-content-layout">
 
       <nz-content style="background:#fff; padding: 24px; min-height: 280px;" class="main-content">
+        <!-- <app-tabs></app-tabs> -->
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
