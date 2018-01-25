@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import storage from './storage';
-import * as swal from 'sweetalert';
 
 @Injectable()
 export class BaseService {
@@ -17,6 +16,7 @@ export class BaseService {
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
+
   }
 
   postInfo(url, data): Observable<any> {
@@ -35,7 +35,7 @@ export class BaseService {
           window.location.href = '/login';
         }, 2000);
       } else if (body.errCode === '10000001') {
-        // swal('错误','error', body.errMsg);
+        swal('错误', 'error', body.errMsg);
       }
 
     }
@@ -47,12 +47,14 @@ export class BaseService {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
+      console.log(body);
       // const err = body.error || JSON.stringify(body);
       const err = 'error';
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
+    swal('请求出错了', errMsg, 'error', { timer: 2000 });
     return Observable.throw(errMsg);
   }
 }
