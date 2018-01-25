@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 import storage from './storage';
-
+import 'sweetalert';
 @Injectable()
 export class BaseService {
   public LOG_OUT = '10000000'; // 登录错误
@@ -54,7 +54,7 @@ export class BaseService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    swal('请求出错了', errMsg, 'error', { timer: 2000 });
+    swal('网络请求出错啦~', errMsg, 'error', { timer: 2000 });
     return Observable.throw(errMsg);
   }
 }
