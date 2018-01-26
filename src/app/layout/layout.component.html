@@ -11,7 +11,7 @@
       ">
         <li nz-submenu *ngFor="let item of menu">
           <span title>
-            <i class="anticon acticon-user">{{item.name}}</i>
+            <i class="anticon {{item.img}}"></i>{{item.name}}
           </span>
           <ul *ngIf="item.child.length>0">
             <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}">
