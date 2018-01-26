@@ -17,20 +17,13 @@ export class TabsComponent implements OnInit, OnChanges {
     {
       name: '我的首页',
       url: '/'
-    }, {
-      name: '患者',
-      url: '/person'
-    }, {
-      name: '患者索引',
-      url: '/search'
-    }, {
-      name: '列表页',
-      url: '/list'
     }
   ];
   indexPageName = '我的首页';
   btnIndex = 0;
   @ViewChild('nzTabHeading') el: ElementRef;
+
+
 
   constructor(public route: ActivatedRoute, public router: Router) {
   }
@@ -65,6 +58,13 @@ export class TabsComponent implements OnInit, OnChanges {
           if (this.tabs[i].url === this.activeUrl) {
             this.btnIndex = i;
             break;
+          }
+        }
+        const pList = document.getElementsByClassName('ant-tabs-tab');
+        for (let i = 0; i < pList.length; i++) {
+          pList[i].className = 'ant-tabs-tab ';
+          if (i === this.btnIndex) {
+            pList[i].className = 'ant-tabs-tab-active ant-tabs-tab ';
           }
         }
       }

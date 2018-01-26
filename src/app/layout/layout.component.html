@@ -8,53 +8,23 @@
     <nz-sider [nzWidth]="200" style="background:#fff ;border-top:1px solid #ececec" class="main-side-layout">
 
       <ul nz-menu [nzMode]="'inline'" style="height:100%;  background-color:#425972;
-      ">
+      " (click)="isOpen()">
         <li nz-submenu *ngFor="let item of menu">
           <span title>
             <i class="anticon {{item.img}}"></i>{{item.name}}
           </span>
-          <ul *ngIf="item.child.length>0">
-            <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}" routerLinkActivated="ant-menu-item-selected">
+          <ul *ngIf="item.child.length>0" class="sec-menu">
+            <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}" routerLinkActivated="ant-menu-item-selected" (click)="menuActivatedPage(cc)">
               {{cc.name}}
             </li>
           </ul>
         </li>
-        <!-- <li nz-submenu>
-          <span title>
-            <i class="anticon anticon-user"></i>subnav 1</span>
-          <ul>
-            <li nz-menu-item>option1</li>
-            <li nz-menu-item>option2</li>
-            <li nz-menu-item>option3</li>
-            <li nz-menu-item>option4</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title>
-            <i class="anticon anticon-laptop"></i>subnav 2</span>
-          <ul>
-            <li nz-menu-item>option5</li>
-            <li nz-menu-item>option6</li>
-            <li nz-menu-item>option7</li>
-            <li nz-menu-item>option8</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title>
-            <i class="anticon anticon-notification"></i>subnav 3</span>
-          <ul>
-            <li nz-menu-item>option9</li>
-            <li nz-menu-item>option10</li>
-            <li nz-menu-item>option11</li>
-            <li nz-menu-item>option12</li>
-          </ul>
-        </li> -->
       </ul>
     </nz-sider>
     <nz-layout class="main-content-layout">
 
       <nz-content style="background:#fff; min-height: 280px;" class="main-content">
-        <app-tabs></app-tabs>
+        <app-tabs (fired)="activatedPage($event)" [activePage]="choosePageName" [activeUrl]="choosePageUrl"></app-tabs>
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>

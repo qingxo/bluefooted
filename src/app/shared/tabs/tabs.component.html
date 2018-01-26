@@ -1,4 +1,4 @@
-<div class="tabs-info">
+<div class="tabs-info" *ngIf="tabs.length>1">
   <nz-tabset [nzType]="'card'">
     <nz-tab *ngFor="let tab of tabs;let index = index" class="dot" (nzClick)="showTpl(tab,index)">
       <ng-template #nzTabHeading>
