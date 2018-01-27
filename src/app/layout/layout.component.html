@@ -3,15 +3,17 @@
     <div class="logo"></div>
 
   </nz-header> -->
-  <app-head-line></app-head-line>
+  <app-head-line (fired)="menuShow($event)"></app-head-line>
   <nz-layout style="min-height:100%;" class="main-layout">
-    <nz-sider [nzWidth]="200" style="background:#fff ;border-top:1px solid #ececec" class="main-side-layout">
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="200" style="background:#425972 ;border-top:1px solid #ececec"
+      class="main-side-layout">
 
-      <ul nz-menu [nzMode]="'inline'" style="height:100%;  background-color:#425972;
+      <ul nz-menu [nzMode]="isCollapsed?'vertical':'inline'" style="  background-color:#425972;height:100%;
       " (click)="isOpen()">
         <li nz-submenu *ngFor="let item of menu">
           <span title>
-            <i class="anticon {{item.img}}"></i>{{item.name}}
+            <i class="anticon {{item.img}}"></i>
+            <span class="nav-text">{{item.name}}</span>
           </span>
           <ul *ngIf="item.child.length>0" class="sec-menu">
             <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}" routerLinkActivated="ant-menu-item-selected" (click)="menuActivatedPage(cc)">
@@ -20,8 +22,37 @@
           </ul>
         </li>
       </ul>
+      <!-- <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-user"></i>
+            <span class="nav-text">User</span>
+          </span>
+          <ul>
+            <li nz-menu-item>Tom</li>
+            <li nz-menu-item>Bill</li>
+            <li nz-menu-item>Alex</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title>
+            <i class="anticon anticon-team"></i>
+            <span class="nav-text">Team</span>
+          </span>
+          <ul>
+            <li nz-menu-item>Team 1</li>
+            <li nz-menu-item>Team 2</li>
+          </ul>
+        </li>
+        <li nz-menu-item>
+          <span>
+            <i class="anticon anticon-file"></i>
+            <span class="nav-text">File</span>
+          </span>
+        </li>
+      </ul> -->
     </nz-sider>
-    <nz-layout class="main-content-layout">
+    <nz-layout class=" main-w main-content-layout-{{isCollapsed}}">
 
       <nz-content style="background:#fff; min-height: 280px;" class="main-content">
         <app-tabs (fired)="activatedPage($event)" [activePage]="choosePageName" [activeUrl]="choosePageUrl"></app-tabs>

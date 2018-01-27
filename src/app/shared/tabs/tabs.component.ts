@@ -104,6 +104,8 @@ export class TabsComponent implements OnInit, OnChanges {
     Infos['killUrl'] = urlTarget;
     const data = { len: this.tabs.length, url: this.activeUrl, name: this.tabs[this.btnIndex].name };
     this.tabInfo.emit(data);
+    this.fired.emit({ name: this.tabs[this.btnIndex].name, url: this.activeUrl });
+
 
   }
 

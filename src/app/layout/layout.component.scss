@@ -9,8 +9,16 @@
     height: 100%;
     overflow: auto;
   }
-  .main-content-layout {
+  .main-w {
+    width: 100%;
+  }
+  .main-content-layout-false {
     padding-left: 200px;
+    transition: all .2s;
+  }
+  .main-content-layout-true {
+    padding-left: 64px;
+    transition: all .2s;
   }
 }
 
@@ -21,4 +29,17 @@
   border-radius: 6px;
   margin: 16px 28px 16px 0;
   float: left;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .nav-text {
+  display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
+  display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .anticon {
+  font-size: 16px;
+  margin-left: 8px;
 }

@@ -14,9 +14,14 @@ export class LayoutComponent implements OnInit {
   ];
   choosePageName: String = '我的首页';
   choosePageUrl: String = '/';
+  isCollapsed: Boolean = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  menuShow(flag) {
+    flag === 'false' ? this.isCollapsed = false : this.isCollapsed = true;
   }
 
   isOpen() {
