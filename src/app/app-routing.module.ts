@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import {NotFoundComponent} from './not-found/not-found.component';
-import {LayoutComponent} from './layout/layout.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login';
 const appRoutes: Routes = [
   { path: '', loadChildren: 'app/layout/layout.module#LayoutModule' },
-{ path: '**', component: NotFoundComponent }
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 
