@@ -1,8 +1,8 @@
 {
   "/api": {
-    "target": "http://45.77.170.101:8339",
+    "target": "http://192.168.10.35:8080",
     "pathRewrite": {
-      "^/api": ""
+      "^/api": "/pc"
     },
     "changeOrigin": true,
     "logLevel": "debug",

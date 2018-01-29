@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouteReuseStrategy } from '@angular/router';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -14,6 +16,7 @@ import { SharedModule } from './shared';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
+import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
 
 
 @NgModule({
@@ -32,7 +35,13 @@ import { LoginComponent } from './login/login.component';
     NgZorroAntdModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: BaseHttpInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BaseHttpInterceptor, multi: true },
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomReuseStrategy
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

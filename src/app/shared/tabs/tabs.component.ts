@@ -87,20 +87,21 @@ export class TabsComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
   closeTab(tab, index) {
+    const tabL = this.tabs.length - 1;
     const arr = this.tabs[this.btnIndex].url.split('/');
     const urlTarget = arr[arr.length - 1];
-    if (this.btnIndex !== index) { // 关闭的页面，不是当前展示的页面时
-      this.tabs.splice(this.tabs.indexOf(tab), 1);
-    } else {
-      this.tabs.splice(this.tabs.indexOf(tab), 1);
-      const len = this.tabs.length - 1;
-      index > len ? this.btnIndex = len : this.btnIndex = index;
-      this.activeUrl = this.tabs[this.btnIndex].url;
-      this.activeTab();
-      this.goTabPages(this.tabs[this.btnIndex].url);
-
+    if (this.btnIndex < index) { // 关闭的页面的序号，大于显示页面
+      this.btnIndex = this.btnIndex;
+    } else if (this.btnIndex === index) { // 关闭的页面就是当前页面
+      if (index === tabL) {
+        this.btnIndex = this.btnIndex - 1;
+      }
+    } else {   // 关闭的页面的序号，小于显示页面
+      this.btnIndex = this.btnIndex - 1;
     }
-
+    this.tabs.splice(this.tabs.indexOf(tab), 1);
+    this.activeUrl = this.tabs[this.btnIndex].url;
+    this.goTabPages(this.activeUrl);
     Infos['killUrl'] = urlTarget;
     const data = { len: this.tabs.length, url: this.activeUrl, name: this.tabs[this.btnIndex].name };
     this.tabInfo.emit(data);

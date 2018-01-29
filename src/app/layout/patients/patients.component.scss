@@ -1,1 +1,267 @@
-.patients-zoom {}
+$bed_on: #00B990 !default;
+$bed_off: #786AFF !default;
+$bed_power-off: #FF9502 !default;
+$bed_no_set: #FF593C !default;
+.patients-info {
+  background-color: white;
+  padding: 8px 10px;
+  .top-line {
+    height: 30px;
+    margin-bottom: 8px;
+    .lf {
+      float: left;
+    }
+    .ipt-select {
+      padding-right: 10px;
+    }
+    .rf {
+      float: right;
+      line-height: 30px;
+    }
+    .search {
+      color: white;
+      background-color: #3d80e4;
+      font-size: 12px;
+      line-height: 30px;
+      padding: 0 14px;
+      height: 30px;
+      display: inline-block;
+      border-radius: 4px;
+    }
+  }
+  .report {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 6px;
+    text-indent: -9999em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    &.report-liangbiao {
+      background-image: url('/assets/images/patient-liangbiao.png');
+    }
+    &.report-jianyan {
+      background-image: url('/assets/images/patient-jianyan.png');
+    }
+    &.report-jiancha {
+      background-image: url('/assets/images/patient-jiancha.png');
+    }
+    &.report-bingli {
+      background-image: url('/assets/images/patient-bingli.png');
+    }
+    &.report-liangbiao2 {
+      background-image: url('/assets/images/patient-liangbiao2.png');
+    }
+    &.report-jianyan2 {
+      background-image: url('/assets/images/patient-jianyan2.png');
+    }
+    &.report-jiancha2 {
+      background-image: url('/assets/images/patient-jiancha2.png');
+    }
+    &.report-bingli2 {
+      background-image: url('/assets/images/patient-bingli2.png');
+    }
+  }
+  .top-line:after {
+    clear: both;
+  }
+  .dashbox-info {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+  /* dashbox 开始 */
+  .dashbox {
+    width: 20%;
+    min-width: 200px;
+    float: left;
+    margin-bottom: 8px;
+    padding-right: 4px;
+    padding-left: 4px;
+    background-color: #ffffff;
+    .box-body:before,
+    .box-body:after {
+      clear: both;
+      content: "";
+      display: table;
+      line-height: 0;
+    }
+    .box-body {
+      position: relative;
+      display: table;
+      width: 100%;
+      padding: 0px;
+      min-height: 147px;
+    }
+    .box-left,
+    .box-right {
+      display: table-cell;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .box-left {
+      width: 30%;
+      text-align: center;
+      border-radius: 4px 0 0 4px;
+      border: 1px solid #DEE4E9;
+      padding: 10px 0;
+      .l-bedno {
+        color: #252525;
+        font-size: 20px;
+        height: 30px;
+        line-height: 30px;
+        position: relative;
+        z-index: 1;
+      }
+      .l-avatar {
+        height: 48px;
+        line-height: 48px;
+        padding-top: 3px;
+      }
+      .l-name {
+        color: #333333;
+        font-size: 14px;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 5px;
+      }
+      .l-age {
+        color: #888888;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+    .box-right {
+      padding: 10px 12px;
+      border-radius: 0 4px 4px 0;
+      border: 1px solid #DEE4E9;
+      border-left: none;
+      vertical-align: top;
+      line-height: 20px;
+      .empty-bed {
+        position: absolute;
+        top: 1px;
+        left: 3px;
+        right: 1px;
+        bottom: 1px;
+        text-align: center;
+        background-color: #fafafa;
+        font-size: 18px;
+        span {
+          position: absolute;
+          display: block;
+          left: 0;
+          top: 50%;
+          width: 100%;
+          line-height: 40px;
+          margin-top: -20px;
+        }
+      }
+      .r-number {
+        font-size: 14px;
+        line-height: 24px;
+        color: #FF9502;
+        z-index: 1;
+      }
+      .reports {
+        padding-top: 4px;
+      }
+      .diagnosis {
+        span:first-child {
+          display: block;
+          float: left;
+        }
+        span:last-child {
+          display: block;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+      }
+    }
+    .box-left-on,
+    .box-left-off,
+    .box-left-power-off,
+    .box-left-no-set {
+      border-left-width: 3px;
+      border-left-style: solid;
+    }
+    .box-left-on {
+      border-left-color: $bed_on;
+    }
+    .box-left-off {
+      border-left-color: $bed_off;
+    }
+    .box-left-power-off {
+      border-left-color: $bed_power_off;
+    }
+    .box-left-no-set {
+      border-left-color: $bed_no_set;
+    }
+    .color-on {
+      color: $bed_on;
+    }
+    .color-off {
+      color: $bed_off;
+    }
+    .color-power-off {
+      color: $bed_power_off;
+    }
+    .color-no-set {
+      color: $bed_no_set;
+    }
+    .box-hit {
+      cursor: pointer;
+      &.empty {
+        cursor: default;
+      }
+    }
+    .box-empty .box-left {
+      border-right: none;
+    }
+    .box-empty .box-right .r-data .r-data-txt {
+      font-size: 16px;
+    }
+    .clear {
+      clear: both;
+    }
+    .avatar-img {
+      display: inline-block;
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+      -webkit-background-size: contain;
+      -moz-background-size: contain;
+      /* 老版本的 Firefox */
+      background-size: contain;
+    }
+    .bed-img {
+      display: inline-block;
+      width: 20px;
+      height: 16px;
+      line-height: 16px;
+      -webkit-background-size: contain;
+      -moz-background-size: contain;
+      /* 老版本的 Firefox */
+      background-size: contain;
+    }
+    .img-man {
+      background: url('/assets/images/avatar.png') no-repeat center center;
+    }
+    .img-woman {
+      background: url('/assets/images/avatar-f.png') no-repeat center center;
+    }
+    .img-bed-on {
+      background: url('/assets/images/bed-on.png') no-repeat center center;
+    }
+    .img-bed-off {
+      background: url('/assets/images/bed-off.png') no-repeat center center;
+    }
+    .img-power-off {
+      background: url('/assets/images/power-off.png') no-repeat center center;
+    }
+  }
+}

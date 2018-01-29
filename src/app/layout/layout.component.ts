@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -15,11 +16,26 @@ export class LayoutComponent implements OnInit {
   choosePageName: String = '我的首页';
   choosePageUrl: String = '/';
   isCollapsed: Boolean = false;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
+    this.initStartMenu({ url: this.router['url'] });
   }
 
+  initStartMenu(data) {
+    let tmpName = '';
+    for (let i = 0; i < this.menu.length; i++) {
+      const tmp = this.menu[i].child;
+      if (tmp.length > 0) {
+        for (let j = 0; j < tmp.length; j++) {
+          if (data.url === tmp[j].url) {
+            tmpName = tmp[j].name;
+          }
+        }
+      }
+    }
+    this.activatedPage({ url: data.url, name: tmpName });
+  }
   menuShow(flag) {
     flag === 'false' ? this.isCollapsed = false : this.isCollapsed = true;
   }

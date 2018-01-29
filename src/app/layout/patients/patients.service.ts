@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../../shared/base.service';
 import { HttpClient } from '@angular/common/http';
+import storage from '../../shared/storage';
 @Injectable()
 export class PatientsService extends BaseService {
 
@@ -8,8 +9,8 @@ export class PatientsService extends BaseService {
     super(http);
   }
 
-  getList() {
-    return this.getInfo('api/plist');
+  getList(data) {
+    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
   }
 
 }

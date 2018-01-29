@@ -1,45 +1,170 @@
-<div>
-  <div>{{pInfo.status}}</div>
-  <div *ngFor="let item of pInfo.list">
-    {{item.name}},{{item.country}}
+<div class="patients-info">
+  <div class="top-line">
+    <!-- <div class="lf">
+      <app-line-btn [totalBtn]="['门诊','在院','出院']" (btnInfo)="firedInfo($event)"></app-line-btn>
+    <span class="ipt-select">
+      <nz-select style="width: 160px;" nzAllowClear [nzFilter]="false" [(ngModel)]="selectedValue" [nzShowSearch]="true">
+        <nz-option *ngFor="let option of selectOptions" [nzLabel]="option.label" [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+    </span>
+
+    <span class="ipt-select">
+      <nz-select style="width: 160px;" nzAllowClear [nzFilter]="false" [(ngModel)]="selectedValue2" [nzShowSearch]="true">
+        <nz-option *ngFor="let option of selectOptions2" [nzLabel]="option.label" [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+    </span>
+
+    <span class="ipt-select">
+      <nz-select style="width: 160px;" nzAllowClear [nzFilter]="false" [(ngModel)]="selectedValue3" [nzShowSearch]="true">
+        <nz-option *ngFor="let option of selectOptions3" [nzLabel]="option.label" [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+    </span>
+  </div> -->
+    <!-- <div class="lf">
+      <app-search-line [placeHolderValue]="['']" (search)="searchInfo($event)"></app-search-line>
+      <a class="search" (click)="showModal()">搜索</a>
+    </div> -->
+    <div class="rf">
+      <span>浏览模式:&emsp;</span>
+      <nz-radio-group [(ngModel)]="radioValue">
+        <label nz-radio [nzValue]="'0'">
+          <span>列表模式</span>
+        </label>
+        <label nz-radio [nzValue]="'1'">
+          <span>卡片模式</span>
+        </label>
+      </nz-radio-group>
+    </div>
   </div>
-</div>
-<div class="patients-zoom">
-  <div class="table-info">
-    <nz-table #nzTable [nzDataSource]="testData" [nzPageSize]="10" [nzTotal]="testData.length">
-      <thead nz-thead>
+
+
+  <div class="table-info" *ngIf="radioValue==0">
+    <table cellpadding="0" cellspacing="0" border="0" *ngIf="list.length>0">
+      <thead>
         <tr>
-          <th nz-th>
+          <!-- <td *ngIf="hospitalInfo==0"><span>门诊号</span></td>
+          <td *ngIf="hospitalInfo!=0"><span>住院号</span></td> -->
+          <td>
+            <span>床号</span>
+          </td>
+          <td>
+            <span>病案号</span>
+          </td>
+          <td>
             <span>姓名</span>
-          </th>
-          <th nz-th>
+          </td>
+          <td>
+            <span>性别</span>
+          </td>
+          <td>
             <span>年龄</span>
-          </th>
-          <th nz-th>
-            <span>地址</span>
-          </th>
-          <th nz-th>
-            <span>操作</span>
-          </th>
+          </td>
+          <td>
+            <span>入院时间</span>
+          </td>
+          <td>
+            <span>入院诊断</span>
+          </td>
+          <td>
+            <span>主治医生</span>
+          </td>
+          <td>
+            <span>状态</span>
+          </td>
+          <td>
+            <span>报告</span>
+          </td>
         </tr>
       </thead>
-      <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor=" let data of nzTable.data ">
-          <td nz-td>
-            <a>{{data.name}}</a>
+      <tbody>
+        <tr *ngFor="let item of list;let index = index">
+          <!-- <td *ngIf="hospitalInfo==0"><span>{{item.visitId}}</span></td>
+          <td *ngIf="hospitalInfo!=0"><span>{{item.inpatientsId}}</span></td> -->
+          <td>
+            <span>{{index+1}}</span>
           </td>
-          <td nz-td>{{data.age}}</td>
-          <td nz-td>{{data.address}}</td>
-          <td nz-td>
-            <span>
-              <a href="# ">Action 一 {{data.name}}</a>
-              <span nz-table-divider></span>
-              <a href="# ">Delete</a>
-
-            </span>
+          <td>
+            <span>012345671</span>
+          </td>
+          <td class="opt">
+            <a href="/patientdetail/{{item.customerId}}" target="_blabk">{{item.name}}</a>
+          </td>
+          <td>
+            <span>{{item.sex=='1'?'男':'女'}}</span>
+          </td>
+          <td>
+            <span>{{item.birthday | pipeBirth}}</span>
+          </td>
+          <td>
+            <span>{{item.visitDate | date:'yyyy-MM-dd hh:mm'}}</span>
+          </td>
+          <td>
+            <span>1、抑郁症；2、睡眠障碍</span>
+          </td>
+          <td>
+            <span>{{item.receptTreatDrName}}</span>
+          </td>
+          <td>
+            <span>在院</span>
+          </td>
+          <td>
+            <a class="report report-liangbiao" title="量表">量表</a>
+            <a class="report report-jianyan" title="检验">检验</a>
+            <a class="report report-jiancha" title="检查">检查</a>
+            <a class="report report-bingli" title="病理">病理</a>
           </td>
         </tr>
+
       </tbody>
-    </nz-table>
+    </table>
+  </div>
+  <div class="dashbox-info" *ngIf="radioValue==1">
+    <div class="dashbox" *ngFor="let item of list;let index = index">
+      <div class="box-body box-hit" [routerLink]="['/patientdetail/item.customerId']">
+        <div class="box-left box-left-on">
+          <div class="l-bedno">{{index+1}}</div>
+          <div class="l-avatar">
+            <span class="avatar-img img-man"></span>
+          </div>
+          <div class="l-name">{{item.name}}</div>
+          <div class="l-age">{{item.birthday | pipeBirth}}岁</div>
+        </div>
+        <div class="box-right">
+          <div class="r-number">
+            <p>病案号：012345671</p>
+          </div>
+          <p>入院日期：{{item.visitDate | date:'yyyy-MM-dd'}}</p>
+          <p class="diagnosis">
+            <span>入院诊断：</span>
+            <span>1、阻塞性睡眠呼吸障碍；2、阻塞性睡眠呼吸障碍</span>
+          </p>
+          <div class="r-doctor">主治医生：{{item.receptTreatDrName}}</div>
+          <div class="reports">
+            <a class="report report-liangbiao2" title="量表">量表</a>
+            <a class="report report-jianyan2" title="检验">检验</a>
+            <a class="report report-jiancha2" title="检查">检查</a>
+            <a class="report report-bingli2" title="病理">病理</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dashbox">
+      <div class="box-body box-hit empty">
+        <div class="box-left">
+          <div class="l-bedno">{{list.length+1}}</div>
+          <div class="l-avatar"></div>
+          <div class="l-name"></div>
+          <div class="l-age"></div>
+        </div>
+        <div class="box-right">
+          <p class="empty-bed">
+            <span>空床</span>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
