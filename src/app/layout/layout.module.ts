@@ -10,6 +10,9 @@ import { LayoutComponent } from './layout.component';
 import { IndexComponent } from './index/index.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PatientsSearchComponent } from './patients-search/patients-search.component';
+import { UsersComponent } from './users/users.component';
+import { RolesComponent } from './roles/roles.component';
+import { RolesAddComponent } from './roles-add/roles-add.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +22,15 @@ import { PatientsSearchComponent } from './patients-search/patients-search.compo
     SharedModule,
     LayoutRoutingModule
   ],
-  declarations: [LayoutComponent, IndexComponent, PatientsComponent, PatientsSearchComponent]
+  entryComponents: [RolesAddComponent],
+  declarations: [
+    LayoutComponent,
+    IndexComponent,
+    PatientsComponent,
+    PatientsSearchComponent,
+    UsersComponent,
+    RolesComponent,
+    RolesAddComponent
+  ]
 })
 export class LayoutModule { }

@@ -1,0 +1,11 @@
+$bed_on: #00B990 !default;
+$bed_off: #786AFF !default;
+$bed_power-off: #FF9502 !default;
+$bed_no_set: #FF593C !default;
+.page-roles {
+  background-color: white;
+  padding: 8px 10px;
+  .btn-add{
+    margin-bottom: 10px;
+  }
+}
