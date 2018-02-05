@@ -13,16 +13,18 @@ import { PatientsSearchComponent } from './patients-search/patients-search.compo
 import { UsersComponent } from './users/users.component';
 import { RolesComponent } from './roles/roles.component';
 import { RolesAddComponent } from './roles-add/roles-add.component';
+import { RolesPrivilegesComponent } from './roles-privileges/roles-privileges.component';
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgZorroAntdModule,
     SharedModule,
     LayoutRoutingModule
   ],
-  entryComponents: [RolesAddComponent],
+  entryComponents: [RolesAddComponent, RolesPrivilegesComponent],
   declarations: [
     LayoutComponent,
     IndexComponent,
@@ -30,7 +32,8 @@ import { RolesAddComponent } from './roles-add/roles-add.component';
     PatientsSearchComponent,
     UsersComponent,
     RolesComponent,
-    RolesAddComponent
+    RolesAddComponent,
+    RolesPrivilegesComponent
   ]
 })
 export class LayoutModule { }

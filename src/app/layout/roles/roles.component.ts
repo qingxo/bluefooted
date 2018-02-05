@@ -3,6 +3,7 @@ import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChil
 import { RolesService } from './roles.service';
 import * as moment from 'moment';
 import { RolesAddComponent } from '../roles-add/roles-add.component';
+import { RolesPrivilegesComponent } from '../roles-privileges/roles-privileges.component';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
@@ -76,16 +77,26 @@ export class RolesComponent implements OnInit {
     this.refreshList();
   }
 
-  showModal() {
+  showModal(roleInfo) {
     const componentFatory = this.componentFactoryResolver.resolveComponentFactory(RolesAddComponent);
     const containerRef = this.viewContainerRef;
     containerRef.clear();
     const dd = <RolesAddComponent>containerRef.createComponent(componentFatory).instance;
-    // dd.initMoreInfo(this.moreInfo);
+    dd.initMoreInfo(roleInfo);
     // dd.fired.subscribe((res) => {
     //   this.moreInfo = res;
     //   this.refreshList();
     // });
   }
-
+  showPrivilegesModal(roleName) {
+    const componentFatory = this.componentFactoryResolver.resolveComponentFactory(RolesPrivilegesComponent);
+    const containerRef = this.viewContainerRef;
+    containerRef.clear();
+    const dd = <RolesPrivilegesComponent>containerRef.createComponent(componentFatory).instance;
+    dd.initMoreInfo(roleName);
+    // dd.fired.subscribe((res) => {
+    //   this.moreInfo = res;
+    //   this.refreshList();
+    // });
+  }
 }

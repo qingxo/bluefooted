@@ -1,5 +1,8 @@
 <div class="page-roles">
-  <button class="btn btn-primary btn-add" (click)="showModal()">+&nbsp;新建</button>
+  <button class="btn-add" nz-button [nzType]="'primary'" (click)="showModal()" nzSize="large">
+    <i class="anticon anticon-plus"></i>
+    <span>新增</span>
+  </button>
   <div class="table-info">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
@@ -33,8 +36,8 @@
             <span>有效</span>
           </td>
           <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
+            <a class="" title="" (click)="showModal({'role_no': 'admin_hskh','role_name': '护士考核管理员'})">角色修改</a>&emsp;
+            <a class="" title="" (click)="showPrivilegesModal('护士考核管理员')">角色权限</a>
           </td>
         </tr>
         <tr>
