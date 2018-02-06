@@ -43,10 +43,10 @@ export class RolesComponent implements OnInit {
     }, {
       'role_no': 'admin_pda',
       'role_name': 'PDA管理员角色'
-    }{
+    }, {
       'role_no': 'admin_role',
       'role_name': '系统管理角色'
-    }{
+    }, {
       'role_no': 'admin_sbjk',
       'role_name': '设备监控管理员角色'
     }]
