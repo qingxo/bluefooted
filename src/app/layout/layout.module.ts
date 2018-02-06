@@ -11,6 +11,8 @@ import { IndexComponent } from './index/index.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PatientsSearchComponent } from './patients-search/patients-search.component';
 import { UsersComponent } from './users/users.component';
+import { UsersAddComponent } from './users-add/users-add.component';
+import { UsersPrivilegesComponent } from './users-privileges/users-privileges.component';
 import { RolesComponent } from './roles/roles.component';
 import { RolesAddComponent } from './roles-add/roles-add.component';
 import { RolesPrivilegesComponent } from './roles-privileges/roles-privileges.component';
@@ -24,13 +26,20 @@ import { RolesPrivilegesComponent } from './roles-privileges/roles-privileges.co
     SharedModule,
     LayoutRoutingModule
   ],
-  entryComponents: [RolesAddComponent, RolesPrivilegesComponent],
+  entryComponents: [
+    RolesAddComponent,
+    RolesPrivilegesComponent,
+    UsersAddComponent,
+    UsersPrivilegesComponent
+  ],
   declarations: [
     LayoutComponent,
     IndexComponent,
     PatientsComponent,
     PatientsSearchComponent,
     UsersComponent,
+    UsersAddComponent,
+    UsersPrivilegesComponent,
     RolesComponent,
     RolesAddComponent,
     RolesPrivilegesComponent

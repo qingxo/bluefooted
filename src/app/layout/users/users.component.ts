@@ -1,5 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
-// import { DialogConditionComponent } from '../dialog-condition';
+import { UsersAddComponent } from '../users-add/users-add.component';
+import { UsersPrivilegesComponent } from '../users-privileges/users-privileges.component';
 import { UsersService } from './users.service';
 import * as moment from 'moment';
 @Component({
@@ -76,10 +77,22 @@ export class UsersComponent implements OnInit {
   }
 
   showModal() {
-    // const componentFatory = this.componentFactoryResolver.resolveComponentFactory(DialogConditionComponent);
-    // const containerRef = this.viewContainerRef;
-    // containerRef.clear();
-    // const dd = <DialogConditionComponent>containerRef.createComponent(componentFatory).instance;
+    const componentFatory = this.componentFactoryResolver.resolveComponentFactory(UsersAddComponent);
+    const containerRef = this.viewContainerRef;
+    containerRef.clear();
+    const dd = <UsersAddComponent>containerRef.createComponent(componentFatory).instance;
+    // dd.initMoreInfo(this.moreInfo);
+    // dd.fired.subscribe((res) => {
+    //   this.moreInfo = res;
+    //   this.refreshList();
+    // });
+  }
+
+  showModalPrivileges() {
+    const componentFatory = this.componentFactoryResolver.resolveComponentFactory(UsersPrivilegesComponent);
+    const containerRef = this.viewContainerRef;
+    containerRef.clear();
+    const dd = <UsersPrivilegesComponent>containerRef.createComponent(componentFatory).instance;
     // dd.initMoreInfo(this.moreInfo);
     // dd.fired.subscribe((res) => {
     //   this.moreInfo = res;
