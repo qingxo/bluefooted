@@ -20,6 +20,16 @@
           <div nz-form-explain *ngIf="getFormControl('role_name').dirty&&getFormControl('role_name').hasError('email')">The input is not valid E-mail!</div>
         </div>
       </div>
+      <div nz-form-item nz-row>
+        <div nz-col [nzSm]="6" [nzXs]="24" nz-form-label>
+          <label nz-form-item-required>备注</label>
+        </div>
+        <div nz-col [nzSm]="14" [nzXs]="24" nz-form-control>
+          <nz-input formControlName="comment" [nzRows]="3" [nzType]="'textarea'" [nzPlaceHolder]="''" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="getFormControl('comment').dirty&&getFormControl('comment').hasError('required')">Please write something here!</div>
+        </div>
+      </div>
     </form>
   </ng-template>
 </nz-modal>

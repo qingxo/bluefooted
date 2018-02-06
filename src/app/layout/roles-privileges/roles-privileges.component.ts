@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 // import { DialogConditionComponent } from '../dialog-condition';
 import { RolesPrivilegesService } from './roles-privileges.service';
 @Component({
@@ -13,27 +13,26 @@ export class RolesPrivilegesComponent implements OnInit {
 
   constructor(private rolesPrivilegesService: RolesPrivilegesService) { }
   isVisible = false;
-  modalTitle: String = '';
+  modalTitle: String = '角色权限-';
+  @Output() fired = new EventEmitter<any>();
   showModal = () => {
-    //console.log();
     this.isVisible = true;
   }
 
   handleOk = (e) => {
-    console.log('点击了确定');
+    //this.fired.emit();
     this.isVisible = false;
-    //console.log(this.role);
   }
 
   handleCancel = (e) => {
-    console.log(e);
     this.isVisible = false;
   }
   ngOnInit() {
     this.showModal();
   }
   initMoreInfo(roleInfo) {
-    this.modalTitle = roleInfo;
+    this.modalTitle += roleInfo.role_name;
+    //this.roleId = roleInfo.role_no;
   }
   changeGrand(grand) {
     const checked = grand.checked;

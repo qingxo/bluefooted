@@ -22,49 +22,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let item of userList">
           <td>
-            <span>张惠珍</span>
+            <span>{{item.name}}</span>
           </td>
           <td>
-            <span>ZHZ</span>
+            <span>{{item.loginname}}</span>
           </td>
           <td>
-            <span>ICU</span>
+            <span>{{item.department}}</span>
           </td>
           <td>
-            <a class="" title="" (click)="showModal()">用户详情</a>&emsp;
-            <a class="" title="" (click)="showModalPrivileges()">权限分配</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>张惠珍</span>
-          </td>
-          <td>
-            <span>ZHZ</span>
-          </td>
-          <td>
-            <span>ICU</span>
-          </td>
-          <td>
-            <a class="" title="" (click)="showModal()">用户详情</a>&emsp;
-            <a class="" title="" (click)="showModalPrivileges()">权限分配</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>张惠珍</span>
-          </td>
-          <td>
-            <span>ZHZ</span>
-          </td>
-          <td>
-            <span>ICU</span>
-          </td>
-          <td>
-            <a class="" title="">用户详情</a>&emsp;
-            <a class="" title="">权限分配</a>
+            <a (click)="showModal(item)">编辑</a>&emsp;
+            <a (click)="showModalPrivileges(item)">权限分配</a>
           </td>
         </tr>
       </tbody>

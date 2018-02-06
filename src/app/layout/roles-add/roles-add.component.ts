@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver, ViewContainerRef, ViewChild, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,7 +6,6 @@ import {
   FormControl,
   ReactiveFormsModule
 } from '@angular/forms';
-// import { DialogConditionComponent } from '../dialog-condition';
 import { RolesAddService } from './roles-add.service';
 import * as moment from 'moment';
 import { RolesPrivilegesComponent } from '../roles-privileges/roles-privileges.component';
@@ -22,42 +21,44 @@ export class RolesAddComponent implements OnInit {
   validateForm: FormGroup;
   modalTitle: String = '新增角色';
   roleInfo: any;
-  editFlag: Boolean = false;
-  showModal = () => {
-    //console.log();
-    this.isVisible = true;
-  }
-
-  handleOk = (e) => {
-    console.log('点击了确定');
-    this.isVisible = false;
-    //console.log(this.role);
-  }
-
-  handleCancel = (e) => {
-    console.log(e);
-    this.isVisible = false;
-  }
-
-
-  constructor(private fb: FormBuilder) { }
+  isEdit: Boolean = false;
+  @Output() fired = new EventEmitter<any>();
+  constructor(private fb: FormBuilder, public rolesAddService: RolesAddService) { }
   ngOnInit() {
     this.showModal();
-    const role_no = this.editFlag ? this.roleInfo['role_no'] : null,
-      role_name = this.editFlag ? this.roleInfo['role_name'] : null;
+    const roleInfo = this.isEdit ? this.roleInfo : {};
     this.validateForm = this.fb.group({
-      role_no: [role_no, [Validators.required]],
-      role_name: [role_name, [Validators.required]]
+      role_no: [roleInfo['role_no'], [Validators.required]],
+      role_name: [roleInfo['role_name'], [Validators.required]],
+      comment: [roleInfo['comment'], [Validators.required]]
     });
   }
 
   initMoreInfo(roleInfo) {
-    this.editFlag = roleInfo ? true : false;
+    // 是否是编辑状态
     if (roleInfo) {
+      this.isEdit = true;
       this.roleInfo = roleInfo;
       this.modalTitle = '编辑-' + roleInfo.role_name;
     }
   }
+
+  showModal = () => {
+    this.isVisible = true;
+  }
+
+  handleOk = (e) => {
+    this.fired.emit({
+      roleInfo: this.validateForm.value,
+      isEdit: this.isEdit
+    });
+    this.isVisible = false;
+  }
+
+  handleCancel = (e) => {
+    this.isVisible = false;
+  }
+
 
   getFormControl(name) {
     return this.validateForm.controls[name];

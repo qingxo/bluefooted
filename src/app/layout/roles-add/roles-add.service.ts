@@ -9,7 +9,10 @@ export class RolesAddService extends BaseService {
     super(http);
   }
 
-  getList(data) {
+  addRole(data) {
+    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+  }
+  editRole(data) {
     return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
   }
 

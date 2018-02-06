@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver, ViewContainerRef, ViewChild, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,15 +21,19 @@ export class UsersAddComponent implements OnInit {
   isVisible = false;
   validateForm: FormGroup;
   modalTitle: String = '新增用户';
-  roleInfo: any;
-  editFlag: Boolean = false;
+  userInfo: any;
+  isEdit: Boolean = false;
+  @Output() fired = new EventEmitter<any>();
   showModal = () => {
     //console.log();
     this.isVisible = true;
   }
 
   handleOk = (e) => {
-    console.log('点击了确定');
+    this.fired.emit({
+      userInfo: this.validateForm.value,
+      isEdit: this.isEdit
+    });
     this.isVisible = false;
     //console.log(this.role);
   }
@@ -43,19 +47,20 @@ export class UsersAddComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
   ngOnInit() {
     this.showModal();
-    const role_no = this.editFlag ? this.roleInfo['role_no'] : null,
-      role_name = this.editFlag ? this.roleInfo['role_name'] : null;
+    const userInfo = this.isEdit ? this.userInfo : {};
     this.validateForm = this.fb.group({
-      role_no: [role_no, [Validators.required]],
-      role_name: [role_name, [Validators.required]]
+      name: [userInfo['name'], [Validators.required]],
+      loginname: [userInfo['loginname'], [Validators.required]],
+      loginpwd: [userInfo['loginpwd'], [Validators.required]],
+      comment: [userInfo['comment'], [Validators.required]]
     });
   }
 
-  initMoreInfo(roleInfo) {
-    this.editFlag = roleInfo ? true : false;
-    if (roleInfo) {
-      this.roleInfo = roleInfo;
-      this.modalTitle = '编辑-' + roleInfo.role_name;
+  initMoreInfo(userInfo) {
+    if (userInfo) {
+      this.isEdit = true;
+      this.userInfo = userInfo;
+      this.modalTitle = '编辑-' + userInfo.loginname;
     }
   }
 

@@ -13,7 +13,7 @@ export class UsersPrivilegesComponent implements OnInit {
 
   constructor(private usersPrivilegesService: UsersPrivilegesService) { }
   isVisible = false;
-  modalTitle: String = '权限分配';
+  modalTitle: String = '权限分配-';
   showModal = () => {
     //console.log();
     this.isVisible = true;
@@ -33,7 +33,7 @@ export class UsersPrivilegesComponent implements OnInit {
     this.showModal();
   }
   initMoreInfo(roleInfo) {
-    this.modalTitle = roleInfo;
+    this.modalTitle += roleInfo.loginname;
   }
   checkRadio(grand) {
     // const checked = grand.checked;

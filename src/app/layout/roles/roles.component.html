@@ -25,49 +25,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let item of rolesList">
           <td>
-            <span>admin_hskh</span>
+            <span>{{item.role_no}}</span>
           </td>
           <td>
-            <span>护士考核管理员</span>
-          </td>
-          <td>
-            <span>有效</span>
-          </td>
-          <td>
-            <a class="" title="" (click)="showModal({'role_no': 'admin_hskh','role_name': '护士考核管理员'})">角色修改</a>&emsp;
-            <a class="" title="" (click)="showPrivilegesModal('护士考核管理员')">角色权限</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>admin_pda</span>
-          </td>
-          <td>
-            <span>PDA管理员角色</span>
+            <span>{{item.role_name}}</span>
           </td>
           <td>
             <span>有效</span>
           </td>
           <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>admin_role</span>
-          </td>
-          <td>
-            <span>系统管理角色</span>
-          </td>
-          <td>
-            <span>有效</span>
-          </td>
-          <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
+            <a (click)="showModal(item)">编辑</a>&emsp;
+            <a (click)="showPrivilegesModal(item)">角色权限</a>
           </td>
         </tr>
       </tbody>

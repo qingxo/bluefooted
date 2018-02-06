@@ -12,5 +12,10 @@ export class UsersService extends BaseService {
   getList(data) {
     return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
   }
-
+  addUser(data) {
+    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+  }
+  editUser(data) {
+    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+  }
 }
