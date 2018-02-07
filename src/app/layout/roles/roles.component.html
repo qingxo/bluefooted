@@ -1,5 +1,8 @@
 <div class="page-roles">
-  <button class="btn btn-primary btn-add" (click)="showModal()">+&nbsp;新建</button>
+  <button class="btn-add" nz-button [nzType]="'primary'" (click)="showModal()" nzSize="large">
+    <i class="anticon anticon-plus"></i>
+    <span>新增</span>
+  </button>
   <div class="table-info">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
@@ -22,49 +25,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let item of rolesList">
           <td>
-            <span>admin_hskh</span>
+            <span>{{item.role_no}}</span>
           </td>
           <td>
-            <span>护士考核管理员</span>
-          </td>
-          <td>
-            <span>有效</span>
-          </td>
-          <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>admin_pda</span>
-          </td>
-          <td>
-            <span>PDA管理员角色</span>
+            <span>{{item.role_name}}</span>
           </td>
           <td>
             <span>有效</span>
           </td>
           <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>admin_role</span>
-          </td>
-          <td>
-            <span>系统管理角色</span>
-          </td>
-          <td>
-            <span>有效</span>
-          </td>
-          <td>
-            <a class="" title="">角色修改</a>&emsp;
-            <a class="" title="">角色权限</a>
+            <a (click)="showModal(item)">编辑</a>&emsp;
+            <a (click)="showPrivilegesModal(item)">角色权限</a>
           </td>
         </tr>
       </tbody>

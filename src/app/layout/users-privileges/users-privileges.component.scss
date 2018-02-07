@@ -1,0 +1,18 @@
+$bed_on: #00B990 !default;
+$bed_off: #786AFF !default;
+$bed_power-off: #FF9502 !default;
+$bed_no_set: #FF593C !default;
+.modal-users-privileges {
+  label{
+    padding: 4px 0;
+    display: block;
+  }
+  .parent,
+  .child{
+    padding-left: 26px;
+  }
+  .ant-modal-body{
+    height: 500px;
+    overflow-y: scroll;
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
-// import { DialogConditionComponent } from '../dialog-condition';
+import { UsersAddComponent } from '../users-add/users-add.component';
+import { UsersPrivilegesComponent } from '../users-privileges/users-privileges.component';
 import { UsersService } from './users.service';
 import * as moment from 'moment';
 @Component({
@@ -10,77 +11,82 @@ import * as moment from 'moment';
 })
 export class UsersComponent implements OnInit {
 
-  hospitalInfo = 0;
-  list: any = [];
-  moreInfo: any = null;
-  patientName = '';
-  selectOptions: any = [
-    { value: 1, label: '全部' },
-    { value: 2, label: '本组' },
-    { value: 3, label: '本人' }
-  ];
-  selectedValue: any = this.selectOptions[0].value;
-  selectOptions2: any = [
-    { value: 1, label: '在院' },
-    { value: 2, label: '待归档' },
-    { value: 3, label: '已归档' }
-  ];
-  selectedValue2: any = this.selectOptions2[0].value;
-  selectOptions3: any = [
-    { value: 1, label: '病案号' },
-    { value: 2, label: '姓名' }
-  ];
-  selectedValue3: any = this.selectOptions3[0].value;
-
-  radioValue: any = '0';
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private usersService: UsersService) { }
+  userList: any = [];
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef,
+    private usersService: UsersService) { }
 
   ngOnInit() {
-    //this.refreshList();
+    this.getUserList();
   }
 
-  searchInfo(info) {
-    this.patientName = info;
-    this.refreshList();
+  // searchInfo(info) {
+  //   this.refreshList();
+  // }
+
+  getUserList() {
+
+    // this.usersService.getList(data).subscribe((res) => {
+    //   if (res.success) {
+    //     this.list = res.data;
+    //   } else {
+    //     this.list = [];
+    //   }
+    // });
+    this.userList = [{
+      'name': '张惠珍',
+      'loginname': 'ZHZ',
+      'department': 'ICU'
+    }, {
+      'name': '谢凤英',
+      'loginname': 'L2458',
+      'department': '门诊部'
+    }, {
+      'name': '吴娟',
+      'loginname': 'L2457',
+      'department': '财务科'
+    }, {
+      'name': '林丽月',
+      'loginname': 'L2456',
+      'department': '放诊科'
+    }]
   }
 
-  refreshList() {
-    const data = { distinct: 'distinct' };
-    if (this.moreInfo !== null) {
-      Object.assign(data, this.moreInfo);
-      if (data['startDate']) {
-        data['startDate'] = moment(data['startDate']).format('YYYY-MM-DD');
-      }
-      if (data['endDate']) {
-        data['endDate'] = moment(data['endDate']).format('YYYY-MM-DD');
-      }
-    }
-    if (this.patientName != '') {
-      data['name'] = this.patientName;
+  // 添加、编辑提交表单
+  submitForm(roleInfo, isEdit) {
+    console.log(roleInfo, isEdit);
+    if (isEdit) {
+      // 编辑
+      this.usersService.editUser(roleInfo).subscribe(res => {
+        // 刷新列表
+      });
+    } else {
+      // 添加
+      this.usersService.addUser(roleInfo).subscribe(res => {
+        // 刷新列表
+      });
     }
 
-    data['status'] = this.hospitalInfo;
+  }
 
-    this.usersService.getList(data).subscribe((res) => {
-      if (res.success) {
-        this.list = res.data;
-      } else {
-        this.list = [];
-      }
+  showModal(userInfo) {
+    const componentFatory = this.componentFactoryResolver.resolveComponentFactory(UsersAddComponent);
+    const containerRef = this.viewContainerRef;
+    containerRef.clear();
+    const dd = <UsersAddComponent>containerRef.createComponent(componentFatory).instance;
+    dd.initMoreInfo(userInfo);
+    dd.fired.subscribe((res) => {
+      this.submitForm(res.userInfo, res.isEdit);
     });
   }
 
-  firedInfo(num) {
-    this.hospitalInfo = num;
-    this.refreshList();
-  }
-
-  showModal() {
-    // const componentFatory = this.componentFactoryResolver.resolveComponentFactory(DialogConditionComponent);
-    // const containerRef = this.viewContainerRef;
-    // containerRef.clear();
-    // const dd = <DialogConditionComponent>containerRef.createComponent(componentFatory).instance;
-    // dd.initMoreInfo(this.moreInfo);
+  showModalPrivileges(userInfo) {
+    const componentFatory = this.componentFactoryResolver.resolveComponentFactory(UsersPrivilegesComponent);
+    const containerRef = this.viewContainerRef;
+    containerRef.clear();
+    const dd = <UsersPrivilegesComponent>containerRef.createComponent(componentFatory).instance;
+    dd.initMoreInfo(userInfo);
     // dd.fired.subscribe((res) => {
     //   this.moreInfo = res;
     //   this.refreshList();

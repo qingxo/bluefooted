@@ -1,0 +1,10 @@
+<nz-modal [nzWidth]="820" [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
+  (nzOnOk)="handleOk($event)" class="modal-users-privileges">
+  <ng-template #modalContent>
+    <div *ngFor="let item of menus.data;">
+      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="checkRadio(item)">
+        <span>{{item.role_name}}</span>
+      </label>
+    </div>
+  </ng-template>
+</nz-modal>
