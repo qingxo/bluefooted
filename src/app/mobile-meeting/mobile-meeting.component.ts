@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-declare var JitsiMeetExternalAPI: any;
 
 @Component({
   selector: 'app-mobile-meeting',
@@ -18,16 +17,4 @@ export class MobileMeetingComponent implements OnInit {
   ngOnInit() {
   }
 
-  initMeeting() {
-
-    this.options = {
-      roomName: 'JitsiMeetAPIExample',
-      width: this.meetingWidth,
-      height: this.meetingHeight,
-      parentNode: document.querySelector('#meet')
-    };
-    console.log(this.options);
-
-    this.api = new JitsiMeetExternalAPI(this.domain, this.options);
-  }
 }
