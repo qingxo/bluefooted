@@ -1,3 +1,12 @@
 <div class="first-page">
-  <div id="meet" class="test"></div>
+  <div class="meeting">
+    <div id="meet" class="meet-big" (click)="changeSize($event)"></div>
+    <div id="remote-meet" class="meet-small pos-abs" (click)="changeSize($event)"></div>
+  </div>
+  <button nz-button [nzType]="'primary'" (click)="initMeeting()">
+    <span>视频通话</span>
+  </button>
+  <button nz-button [nzType]="'primary'" (click)="closeMeeting()">
+    <span>关闭视频</span>
+  </button>
 </div>
