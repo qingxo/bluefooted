@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { HeadLineComponent } from './head-line/head-line.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { PagesComponent } from './pages/pages.component';
 import { PipeBirthPipe } from './pipes/pipe-birth.pipe';
 
 @NgModule({
@@ -14,7 +15,7 @@ import { PipeBirthPipe } from './pipes/pipe-birth.pipe';
     NgZorroAntdModule,
     ReactiveFormsModule
   ],
-  declarations: [HeadLineComponent, TabsComponent, PipeBirthPipe],
-  exports: [HeadLineComponent, TabsComponent, PipeBirthPipe]
+  declarations: [HeadLineComponent, TabsComponent, PagesComponent, PipeBirthPipe],
+  exports: [HeadLineComponent, TabsComponent, PagesComponent, PipeBirthPipe]
 })
 export class SharedModule { }

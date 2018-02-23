@@ -4,6 +4,7 @@ import { RolesService } from './roles.service';
 import * as moment from 'moment';
 import { RolesAddComponent } from '../roles-add/roles-add.component';
 import { RolesPrivilegesComponent } from '../roles-privileges/roles-privileges.component';
+import tools from '../../shared/tools';
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
@@ -14,8 +15,10 @@ export class RolesComponent implements OnInit {
 
 
   rolesList: any = [];
-
-  radioValue: any = '0';
+  pageSize = 10;
+  pageNumber = 1;
+  pages: Array<any> = [];
+  totalPage: number;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
@@ -28,12 +31,21 @@ export class RolesComponent implements OnInit {
   // searchInfo(info) {
   //   this.refreshList();
   // }
-
+  pageTurning(number) {
+    this.pageNumber = number;
+    this.getRolesList();
+  }
   getRolesList() {
     // const data = {};
-    // this.rolesService.getList(data).subscribe((res) => {
+    // this.rolesService.getList({
+    //   pageSize: this.pageSize,
+    //   pageNum: this.pageNumber
+    // }).subscribe((res) => {
     //   if (res.success) {
     //     this.rolesList = res.data;
+    //     this.pages = res.data.navigatepageNums;
+    //     this.pageNumber = res.data.pageNum;
+    //     this.totalPage = res.data.total;
     //   }
     // });
 
@@ -51,19 +63,34 @@ export class RolesComponent implements OnInit {
       'role_name': '设备监控管理员角色'
     }]
   }
-
+  deleteRole(roleId) {
+    tools.tipsConfirm('提示', '确定删除该用户吗？', () => {
+      this.rolesService.deleteRole(roleId).subscribe(res => {
+        if (res.success) {
+          tools.tips('提示', '删除成功', 'success');
+          // 刷新列表
+          this.getRolesList();
+        } else {
+          tools.tips('提示', res.errMsg, 'error');
+        }
+      });
+    })
+  }
   // 添加、编辑提交表单
   submitForm(roleInfo, isEdit) {
     console.log(roleInfo, isEdit);
     if (isEdit) {
       // 编辑
       this.rolesService.addRole(roleInfo).subscribe(res => {
-        // 刷新列表
+        tools.tips('提示', '编辑成功', 'success');
+        this.getRolesList();
       });
     } else {
       // 添加
       this.rolesService.addRole(roleInfo).subscribe(res => {
         // 刷新列表
+        tools.tips('提示', '添加成功', 'success');
+        this.getRolesList();
       });
     }
 

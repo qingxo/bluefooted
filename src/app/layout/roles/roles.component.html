@@ -37,10 +37,12 @@
           </td>
           <td>
             <a (click)="showModal(item)">编辑</a>&emsp;
-            <a (click)="showPrivilegesModal(item)">角色权限</a>
+            <a (click)="showPrivilegesModal(item)">角色权限</a>&emsp;
+            <a (click)="deleteRole(item.roleId)">删除</a>
           </td>
         </tr>
       </tbody>
     </table>
+    <app-pages [pages]=pages (pageInfo)="pageTurning($event)" [sum]=totalPage [currentPage]=pageNumber></app-pages>
   </div>
 </div>

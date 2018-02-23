@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 // import { DialogConditionComponent } from '../dialog-condition';
 import { UsersPrivilegesService } from './users-privileges.service';
 @Component({
@@ -13,7 +13,10 @@ export class UsersPrivilegesComponent implements OnInit {
 
   constructor(private usersPrivilegesService: UsersPrivilegesService) { }
   isVisible = false;
+  menus: Array<any> = [];
   modalTitle: String = '权限分配-';
+  userInfo: any;
+  @Output() fired = new EventEmitter<any>();
   showModal = () => {
     //console.log();
     this.isVisible = true;
@@ -23,6 +26,11 @@ export class UsersPrivilegesComponent implements OnInit {
     console.log('点击了确定');
     this.isVisible = false;
     //console.log(this.role);
+    this.submitForm();
+    // this.fired.emit({
+    //   userInfo: this.validateForm.value,
+    //   isEdit: this.isEdit
+    // });
   }
 
   handleCancel = (e) => {
@@ -32,42 +40,100 @@ export class UsersPrivilegesComponent implements OnInit {
   ngOnInit() {
     this.showModal();
   }
-  initMoreInfo(roleInfo) {
-    this.modalTitle += roleInfo.loginname;
+  initMoreInfo(userInfo) {
+    this.modalTitle += userInfo.userName;
+    this.userInfo = userInfo;
+    this.getPrivileges(userInfo.userId);
   }
-  checkRadio(grand) {
-    // const checked = grand.checked;
-    // grand.children.forEach((item, index) => {
-    //   item.checked = checked;
-    //   item.children.forEach((subItem, index) => {
-    //     subItem.checked = checked;
-    //   })
-    // })
+  submitForm() {
+    console.log(this.menus);
+    const userId = this.userInfo.userId,
+      menus = this.menus;
 
-    // grand.checked = true;
-    // grand.children.forEach((item, index) => {
-    //   if (!item.checked) {
-    //     grand.checked = false;
-    //   }
-    // })
+    // 获取勾选的所有角色id
+    let checkedArr = [];
+    this.menus.forEach((item, index) => {
+      if (item.checked) {
+        checkedArr.push(item.id);
+      }
+      item.children.forEach((subItem, index) => {
+        if (subItem.checked) {
+          checkedArr.push(subItem.id);
+        }
+      });
+    });
+    console.log(checkedArr);
+    // this.usersPrivilegesService.updatePrivileges(userId, menus).subscribe(res => {
+
+    // });
+  }
+  changeGrand(grand) {
+    const checked = grand.checked;
+    grand.children && grand.children.forEach((item, index) => {
+      item.checked = checked;
+      item.children && item.children.forEach((subItem, index) => {
+        subItem.checked = checked;
+      })
+    })
+
+    grand.checked = true;
+    grand.children && grand.children.forEach((item, index) => {
+      if (!item.checked) {
+        grand.checked = false;
+      }
+    })
+  }
+  changeChildren(grand, parent) {
+    parent.checked = true;
+    parent.children.forEach((item, index) => {
+      if (!item.checked) {
+        parent.checked = false;
+      }
+    })
+
+    grand.checked = true;
+    grand.children.forEach((item, index) => {
+      if (!item.checked) {
+        grand.checked = false;
+      }
+    })
+  }
+  changeParent(grand, parent) {
+    grand.checked = true;
+    grand.children && grand.children.forEach((item, index) => {
+      if (!item.checked) {
+        grand.checked = false;
+      }
+    })
+
+    console.log(parent.checked)
+    parent.children && parent.children.forEach((item, index) => {
+      item.checked = parent.checked;
+    })
+
+  }
+  getPrivileges(userId) {
+    this.usersPrivilegesService.getPrivileges(userId).subscribe((res) => {
+      this.menus = res.data;
+    })
   }
   // allChecked = false;
   // indeterminate = true;
-  menus = {
-    "data": [{
-      'checked': true,
-      'role_id': 1,
-      'role_name': '系统管理角色'
-    }, {
-      'checked': true,
-      'role_id': 2,
-      'role_name': 'PDA管理员角色'
-    }, {
-      'checked': true,
-      'role_id': 3,
-      'role_name': '护士考核管理员'
-    }]
-  };
+  // menus = {
+  //   "data": [{
+  //     'checked': true,
+  //     'role_id': 1,
+  //     'role_name': '系统管理角色'
+  //   }, {
+  //     'checked': true,
+  //     'role_id': 2,
+  //     'role_name': 'PDA管理员角色'
+  //   }, {
+  //     'checked': true,
+  //     'role_id': 3,
+  //     'role_name': '护士考核管理员'
+  //   }]
+  // };
 
   // updateAllChecked() {
   //   this.indeterminate = false;

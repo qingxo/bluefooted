@@ -3,15 +3,15 @@
   <ng-template #modalContent>
     <div class="grand" *ngFor="let item of menus.data;">
       <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeGrand(item)">
-        <span>{{item.text}}</span>
+        <span>{{item.name}}</span>
       </label>
       <div class="parent" *ngFor="let subItem of item.children;">
         <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="changeParent(item, subItem)">
-          <span>{{subItem.text}}</span>
+          <span>{{subItem.name}}</span>
         </label>
         <div class="child" *ngFor="let childItem of subItem.children;">
           <label nz-checkbox [(ngModel)]="childItem.checked" (ngModelChange)="changeChildren(item, subItem)">
-            <span>{{childItem.text}}</span>
+            <span>{{childItem.name}}</span>
           </label>
         </div>
       </div>

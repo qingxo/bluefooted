@@ -1,5 +1,5 @@
 <div class="page-users">
-  <button class="btn-add" nz-button [nzType]="'primary'" (click)="showModal()" nzSize="large">
+  <button class="btn-add" nz-button [nzType]="'primary'" (click)="showModal(null)" nzSize="large">
     <i class="anticon anticon-plus"></i>
     <span>新增</span>
   </button>
@@ -13,9 +13,9 @@
           <td>
             <span>登录名</span>
           </td>
-          <td>
+          <!-- <td>
             <span>科室名称</span>
-          </td>
+          </td> -->
           <td>
             <span>操作</span>
           </td>
@@ -24,20 +24,23 @@
       <tbody>
         <tr *ngFor="let item of userList">
           <td>
-            <span>{{item.name}}</span>
+            <span>{{item.userName}}</span>
           </td>
           <td>
-            <span>{{item.loginname}}</span>
+            <span>{{item.loginName}}</span>
           </td>
-          <td>
+          <!-- <td>
             <span>{{item.department}}</span>
-          </td>
+          </td> -->
           <td>
             <a (click)="showModal(item)">编辑</a>&emsp;
-            <a (click)="showModalPrivileges(item)">权限分配</a>
+            <a (click)="showModalPrivileges(item)">权限分配</a>&emsp;
+            <a (click)="deleteUser(item.userId)">删除</a>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <app-pages [pages]=pages (pageInfo)="pageTurning($event)" [sum]=totalPage [currentPage]=pageNumber></app-pages>
   </div>
 </div>

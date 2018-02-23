@@ -20,4 +20,7 @@ export class RolesService extends BaseService {
   editRole(data) {
     return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
   }
+  deleteRole(roleId) {
+    return this.deleteInfo('api/mm/user/delete/' + roleId);
+  }
 }

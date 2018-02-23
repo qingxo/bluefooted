@@ -10,13 +10,14 @@
 
       <ul nz-menu [nzMode]="isCollapsed?'vertical':'inline'" style="  background-color:#425972;height:100%;
       " (click)="isOpen()">
-        <li nz-submenu *ngFor="let item of menu">
+        <li nz-submenu *ngFor="let item of menu" [ngClass]="{'ant-menu-submenu-open': true}">
           <span title>
             <i class="anticon {{item.img}}"></i>
             <span class="nav-text">{{item.name}}</span>
           </span>
-          <ul *ngIf="item.child.length>0" class="sec-menu">
-            <li nz-menu-item *ngFor="let cc of item.child" routerLink="{{cc.url}}" routerLinkActivated="ant-menu-item-selected" (click)="menuActivatedPage(cc)">
+          <ul *ngIf="item.children.length>0" class="sec-menu">
+            <li nz-menu-item [ngClass]="{'ant-menu-item-selected': true}" *ngFor="let cc of item.children" routerLink="{{cc.url}}" routerLinkActivated="ant-menu-item-selected"
+              (click)="menuActivatedPage(cc)">
               {{cc.name}}
             </li>
           </ul>

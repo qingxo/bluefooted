@@ -24,7 +24,11 @@ export class BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
+  deleteInfo(url: any): Observable<any> {
+    return this.http.delete(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
   private extractData(res: any) {
     // const body = res.json();
     const body = res;

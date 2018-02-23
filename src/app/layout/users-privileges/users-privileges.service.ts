@@ -10,7 +10,14 @@ export class UsersPrivilegesService extends BaseService {
     super(http);
   }
 
-  getList(data) {
-    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+  getPrivileges(userId) {
+    return this.postInfo('api/mm/tree/roleTree/' + userId, storage.serialize({}));
   }
+  updatePrivileges(userId, data) {
+    return this.postInfo('api/mm/tree/roleTree/' + userId, storage.serialize(data));
+  }
+  // 设置角色
+  // setRole(data) {
+  //   return this.postInfo('api/mm/roleTree/' + data.userId, storage.serialize({}));
+  // }
 }

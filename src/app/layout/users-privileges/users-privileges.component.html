@@ -1,10 +1,15 @@
 <nz-modal [nzWidth]="820" [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
   (nzOnOk)="handleOk($event)" class="modal-users-privileges">
   <ng-template #modalContent>
-    <div *ngFor="let item of menus.data;">
-      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="checkRadio(item)">
-        <span>{{item.role_name}}</span>
+    <div *ngFor="let item of menus;">
+      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeGrand(item)">
+        <span>{{item.name}}</span>
       </label>
+      <div class="parent" *ngFor="let subItem of item.children;">
+        <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="changeParent(item, subItem)">
+          <span>{{subItem.name}}</span>
+        </label>
+      </div>
     </div>
   </ng-template>
 </nz-modal>

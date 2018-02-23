@@ -16,7 +16,7 @@ export class IndexComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.initMeeting();
+    //this.initMeeting();
   }
 
   initMeeting() {

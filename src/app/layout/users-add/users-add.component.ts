@@ -30,8 +30,12 @@ export class UsersAddComponent implements OnInit {
   }
 
   handleOk = (e) => {
+    let userInfo = this.validateForm.value;
+    if (this.isEdit) {
+      userInfo.userId = this.userInfo.userId;
+    }
     this.fired.emit({
-      userInfo: this.validateForm.value,
+      userInfo,
       isEdit: this.isEdit
     });
     this.isVisible = false;
@@ -49,9 +53,9 @@ export class UsersAddComponent implements OnInit {
     this.showModal();
     const userInfo = this.isEdit ? this.userInfo : {};
     this.validateForm = this.fb.group({
-      name: [userInfo['name'], [Validators.required]],
-      loginname: [userInfo['loginname'], [Validators.required]],
-      loginpwd: [userInfo['loginpwd'], [Validators.required]],
+      userName: [userInfo['userName'], [Validators.required]],
+      loginName: [userInfo['loginName'], [Validators.required]],
+      passWord: [userInfo['passWord'], [Validators.required]],
       comment: [userInfo['comment'], [Validators.required]]
     });
   }

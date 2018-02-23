@@ -36,16 +36,16 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // api proxy
 app.use('/api', proxy(config.api, {
-  proxyReqPathResolver: function(req, res) {
-    return require('url').parse("/pc" + req.url).path;
+  proxyReqPathResolver: function (req, res) {
+    return require('url').parse("" + req.url).path;
   }
 }));
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
 const port = config.port || process.env.PORT
-app.listen(port, function() {
+app.listen(port, function () {
   console.log('🌎 => App is running on port %s', port)
 })

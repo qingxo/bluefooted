@@ -10,12 +10,15 @@ export class UsersService extends BaseService {
   }
 
   getList(data) {
-    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+    return this.postInfo('api/mm/user/listByPage', storage.serialize(data));
   }
   addUser(data) {
-    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+    return this.postInfo('api/mm/user/add', storage.serialize(data));
   }
   editUser(data) {
-    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+    return this.postInfo('api/mm/user/modify', storage.serialize(data));
+  }
+  deleteUser(userId) {
+    return this.deleteInfo('api/mm/user/delete/' + userId);
   }
 }

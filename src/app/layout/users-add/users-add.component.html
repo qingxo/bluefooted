@@ -4,29 +4,29 @@
     <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm()">
       <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
-          <label for="name" nz-form-item-required>用户名称</label>
+          <label for="userName" nz-form-item-required>用户名</label>
         </div>
         <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-          <nz-input [nzSize]="'large'" formControlName="name" [nzId]="'name'"></nz-input>
-          <div nz-form-explain *ngIf="getFormControl('name').dirty&&getFormControl('name').hasError('email')">The input is not valid E-mail!</div>
+          <nz-input [nzSize]="'large'" formControlName="userName" [nzId]="'userName'"></nz-input>
+          <div nz-form-explain *ngIf="getFormControl('userName').dirty&&getFormControl('userName').hasError('email')">The input is not valid E-mail!</div>
         </div>
       </div>
       <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
-          <label for="loginname" nz-form-item-required>登录名</label>
+          <label for="loginName" nz-form-item-required>登录名</label>
         </div>
         <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-          <nz-input [nzSize]="'large'" formControlName="loginname" [nzId]="'loginname'"></nz-input>
-          <div nz-form-explain *ngIf="getFormControl('loginname').dirty&&getFormControl('loginname').hasError('email')">The input is not valid E-mail!</div>
+          <nz-input [nzSize]="'large'" formControlName="loginName" [nzId]="'loginName'"></nz-input>
+          <div nz-form-explain *ngIf="getFormControl('loginName').dirty&&getFormControl('loginName').hasError('email')">The input is not valid E-mail!</div>
         </div>
       </div>
       <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
-          <label for="loginpwd" nz-form-item-required>登录口令</label>
+          <label for="passWord" nz-form-item-required>登录口令</label>
         </div>
         <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
-          <nz-input [nzSize]="'large'" formControlName="loginpwd" [nzId]="'loginpwd'"></nz-input>
-          <div nz-form-explain *ngIf="getFormControl('loginpwd').dirty&&getFormControl('loginpwd').hasError('email')">The input is not valid E-mail!</div>
+          <nz-input [nzSize]="'large'" formControlName="passWord" [nzId]="'passWord'"></nz-input>
+          <div nz-form-explain *ngIf="getFormControl('passWord').dirty&&getFormControl('passWord').hasError('email')">The input is not valid E-mail!</div>
         </div>
       </div>
       <div nz-form-item nz-row>
