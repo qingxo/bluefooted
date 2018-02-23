@@ -1,0 +1,17 @@
+.mobile-page {
+  display: flex;
+  height: 100%;
+  .meeting {
+    display: flex;
+    flex-grow: 1;
+    background-color: grey;
+  }
+  .btn {
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    button:first-child {
+      margin-right: 50px;
+    }
+  }
+}

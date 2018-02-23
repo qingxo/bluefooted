@@ -20,7 +20,7 @@
     "styles": [
       "styles.scss"
     ],
-    "scripts": ["./vendor/external_api.js"],
+    "scripts": ["./vendor/AgoraRTCSDK-2.0.0.js"],
     "environmentSource": "environments/environment.ts",
     "environments": {
       "dev": "environments/environment.ts",

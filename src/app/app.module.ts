@@ -17,13 +17,15 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
+import { MobileMeetingComponent } from './mobile-meeting/mobile-meeting.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    MobileMeetingComponent
   ],
   imports: [
     BrowserModule,

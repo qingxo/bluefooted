@@ -1,37 +1,27 @@
 import { Component, OnInit, Input } from '@angular/core';
-import Infos from '../../shared/Infos';
+import Infos from '../shared/Infos';
+
 declare var AgoraRTC: any;
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  selector: 'app-mobile-meeting',
+  templateUrl: './mobile-meeting.component.html',
+  styleUrls: ['./mobile-meeting.component.scss']
 })
-export class IndexComponent implements OnInit {
-  @Input() channel: any = '1000';
+export class MobileMeetingComponent implements OnInit {
 
+  // @Input() channel: any = (Math.random() * 10000).toFixed();
+  @Input() channel: any = '1000';
   appid: any = Infos.appid;
-  meetingWidth: Number = 700;
-  meetingHeight: Number = 700;
+  meetingWidth: Number = window.screen.width;
+  meetingHeight: Number = window.screen.height;
   client = AgoraRTC.createClient({ mode: 'interop' });
   localStream: any;
-  gohost: Boolean = true;
   constructor() { }
 
   ngOnInit() {
   }
 
-  changeSize(target) {
-    const str = target.target.classList.value;
-    if (str.includes('pos-abs')) {
-      const mt = document.getElementById('meet');
-      const rmt = document.getElementById('remote-meet');
-      mt.className.includes('pos-abs') ? mt.className = 'meet-big' : mt.className = 'meet-small pos-abs';
-      rmt.className.includes('pos-abs') ? rmt.className = 'meet-big' : rmt.className = 'meet-small pos-abs';
-
-    }
-    const sm = document.getElementsByClassName('pos-abs');
-  }
 
   initMeeting() {
     this.initClient();
@@ -76,16 +66,14 @@ export class IndexComponent implements OnInit {
     this.localStream.init(() => {
       console.log('Local stream initialized');
       this.initPlay();
-      if (this.gohost) {
-        this.client.on('stream-published', function (evt) {
-          console.log('Publish local stream successfully');
-        });
 
-        this.client.publish(this.localStream, function (err) {
-          console.log('Publish stream failed', err);
-        });
-      }
+      this.client.on('stream-published', function (evt) {
+        console.log('Publish local stream successfully');
+      });
 
+      this.client.publish(this.localStream, function (err) {
+        console.log('Publish stream failed', err);
+      });
     });
 
 
