@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RolesAddService } from './roles-add.service';
 import * as moment from 'moment';
+import tools from '../../shared/tools';
 import { RolesPrivilegesComponent } from '../roles-privileges/roles-privileges.component';
 @Component({
   selector: 'app-roles-add',
@@ -21,6 +22,10 @@ export class RolesAddComponent implements OnInit {
   validateForm: FormGroup;
   modalTitle: String = '新增角色';
   roleInfo: any;
+  role_no: any;
+  role_name: any;
+  comment: any;
+  appId: any;
   isEdit: Boolean = false;
   @Output() fired = new EventEmitter<any>();
   constructor(private fb: FormBuilder, public rolesAddService: RolesAddService) { }
@@ -28,9 +33,9 @@ export class RolesAddComponent implements OnInit {
     this.showModal();
     const roleInfo = this.isEdit ? this.roleInfo : {};
     this.validateForm = this.fb.group({
-      role_no: [roleInfo['role_no'], [Validators.required]],
-      role_name: [roleInfo['role_name'], [Validators.required]],
-      comment: [roleInfo['comment'], [Validators.required]]
+      role_no: [roleInfo['roleId'], [Validators.required]],
+      role_name: [roleInfo['roleName'], [Validators.required]],
+      comment: [roleInfo['note'], [Validators.required]]
     });
   }
 
@@ -39,7 +44,10 @@ export class RolesAddComponent implements OnInit {
     if (roleInfo) {
       this.isEdit = true;
       this.roleInfo = roleInfo;
-      this.modalTitle = '编辑-' + roleInfo.role_name;
+      this.role_name = this.roleInfo['roleName'];
+      this.role_no = this.roleInfo['roleId'];
+      this.comment = this.roleInfo['note'];
+      this.modalTitle = '编辑-' + roleInfo['roleName'];
     }
   }
 
@@ -48,11 +56,32 @@ export class RolesAddComponent implements OnInit {
   }
 
   handleOk = (e) => {
-    this.fired.emit({
-      roleInfo: this.validateForm.value,
-      isEdit: this.isEdit
-    });
-    this.isVisible = false;
+    const data = {
+      roleId: this.role_no,
+      roleName: this.role_name,
+      note: this.comment,
+      appId: 'MM'
+    };
+    if (this.isEdit) {
+      this.rolesAddService.editRole(data).subscribe((res) => {
+        if (res['success']) {
+          tools.tips('成功');
+          this.isVisible = false;
+        } else {
+          tools.tips('失败', '', 'error');
+        }
+      });
+    } else {
+      this.rolesAddService.addRole(data).subscribe((res) => {
+        if (res['success']) {
+          tools.tips('成功');
+          this.isVisible = false;
+        } else {
+          tools.tips('失败', '', 'error');
+        }
+      });
+    }
+
   }
 
   handleCancel = (e) => {

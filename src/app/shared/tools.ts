@@ -1,9 +1,7 @@
-// import * as $ from 'jquery';
 import storage from './storage';
-// import SysData from './sysData';
 import 'sweetalert';
 class Tools {
-  private aCity: object = {
+  aCity: object = {
     11: '北京', 12: '天津', 13: '河北', 14: '山西',
     15: '内蒙古', 21: '辽宁', 22: '吉林',
     23: '黑龙江', 31: '上海', 32: '江苏',
@@ -15,7 +13,7 @@ class Tools {
     82: '澳门', 91: '国外'
   };
 
-  private TIMER = 2000;
+  TIMER = 2000;
 
   // initBtnShow(topLevel, secondLevel, btnKey) {
   //   if (!storage.get('menu')) {
@@ -90,17 +88,6 @@ class Tools {
   // }
 
   tips(msgTitle: string, msgDetail: string = '', msgType: any = 'success', timer: number = this.TIMER) {
-    // setTimeout(() => {
-    //   swal({
-    //     title: msgTitle,
-    //     text: msgDetail,
-    //     type: msgType,
-    //     timer: timer,
-    //     showConfirmButton: false,
-    //     showCancelButton: true,
-    //     cancelButtonText: '确定'
-    //   });
-    // }, 50);
     setTimeout(() => {
       swal({
         title: msgTitle,
@@ -108,37 +95,38 @@ class Tools {
         icon: msgType,
         buttons: {
           confirm: {
-            text: "确定",
+            text: '确定',
             value: true,
             visible: true,
-            className: "",
+            className: '',
             closeModal: true,
           }
-        }
+        },
+        timer: timer
       });
     }, 50);
 
   }
 
 
-  tipsConfirm(msgTitle: string, msgText: string, callback) {
+  tipsConfirm(msgTitle: string, msgText: string, callback: any) {
     swal({
       title: msgTitle,
       text: msgText,
       icon: 'warning',
       buttons: {
         cancel: {
-          text: "取消",
+          text: '取消',
           value: null,
           visible: true,
-          className: "",
+          className: '',
           closeModal: true,
         },
         confirm: {
-          text: "确定",
+          text: '确定',
           value: true,
           visible: true,
-          className: "",
+          className: '',
           closeModal: true
         }
       }
@@ -156,7 +144,6 @@ class Tools {
     return flag;
   }
 
-
   // 能输入数字和小数点的判断
   numberFixed(target: any) {
     const newH = target.replace(/[^\d\.]*/g, '');
@@ -169,10 +156,6 @@ class Tools {
       target = p;
     }
     return target;
-
   }
-
-
 }
-
 export default new Tools();
