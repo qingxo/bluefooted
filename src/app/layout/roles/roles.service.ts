@@ -12,7 +12,7 @@ export class RolesService extends BaseService {
   }
 
   getList(data) {
-    return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
+    return this.postInfo(`api/mm/role/listByPage`, storage.serialize(data));
   }
   addRole(data) {
     return this.postInfo('api/v1/cust/getCustomerByParams', storage.serialize(data));
@@ -23,4 +23,5 @@ export class RolesService extends BaseService {
   deleteRole(roleId) {
     return this.deleteInfo('api/mm/user/delete/' + roleId);
   }
+
 }

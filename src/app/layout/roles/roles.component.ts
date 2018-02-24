@@ -36,32 +36,18 @@ export class RolesComponent implements OnInit {
     this.getRolesList();
   }
   getRolesList() {
-    // const data = {};
-    // this.rolesService.getList({
-    //   pageSize: this.pageSize,
-    //   pageNum: this.pageNumber
-    // }).subscribe((res) => {
-    //   if (res.success) {
-    //     this.rolesList = res.data;
-    //     this.pages = res.data.navigatepageNums;
-    //     this.pageNumber = res.data.pageNum;
-    //     this.totalPage = res.data.total;
-    //   }
-    // });
-
-    this.rolesList = [{
-      'role_no': 'admin_hskh',
-      'role_name': '护士考核管理员'
-    }, {
-      'role_no': 'admin_pda',
-      'role_name': 'PDA管理员角色'
-    }, {
-      'role_no': 'admin_role',
-      'role_name': '系统管理角色'
-    }, {
-      'role_no': 'admin_sbjk',
-      'role_name': '设备监控管理员角色'
-    }]
+    const data = {};
+    this.rolesService.getList({
+      pageSize: this.pageSize,
+      pageNum: this.pageNumber
+    }).subscribe((res) => {
+      if (res.success) {
+        this.rolesList = res.data.list;
+        this.pages = res.data.navigatepageNums;
+        this.pageNumber = res.data.pageNum;
+        this.totalPage = res.data.total;
+      }
+    });
   }
   deleteRole(roleId) {
     tools.tipsConfirm('提示', '确定删除该用户吗？', () => {
@@ -74,7 +60,7 @@ export class RolesComponent implements OnInit {
           tools.tips('提示', res.errMsg, 'error');
         }
       });
-    })
+    });
   }
   // 添加、编辑提交表单
   submitForm(roleInfo, isEdit) {

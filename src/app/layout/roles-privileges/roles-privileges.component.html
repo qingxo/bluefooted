@@ -1,16 +1,16 @@
 <nz-modal [nzWidth]="820" [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
   (nzOnOk)="handleOk($event)" class="modal-roles-privileges">
   <ng-template #modalContent>
-    <div class="grand" *ngFor="let item of menus.data;">
-      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeGrand(item)">
+    <div class="grand" *ngFor="let item of menus.children;">
+      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeFlag(item)">
         <span>{{item.name}}</span>
       </label>
       <div class="parent" *ngFor="let subItem of item.children;">
-        <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="changeParent(item, subItem)">
+        <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="changeFlag( subItem,item)">
           <span>{{subItem.name}}</span>
         </label>
         <div class="child" *ngFor="let childItem of subItem.children;">
-          <label nz-checkbox [(ngModel)]="childItem.checked" (ngModelChange)="changeChildren(item, subItem)">
+          <label nz-checkbox [(ngModel)]="childItem.checked" (ngModelChange)="changeFlag(childItem, subItem,item)">
             <span>{{childItem.name}}</span>
           </label>
         </div>
