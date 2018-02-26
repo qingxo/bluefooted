@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 // import { DialogConditionComponent } from '../dialog-condition';
 import { UsersPrivilegesService } from './users-privileges.service';
+import tools from '../../shared/tools';
 @Component({
   selector: 'app-users-privileges',
   templateUrl: './users-privileges.component.html',
@@ -23,18 +24,12 @@ export class UsersPrivilegesComponent implements OnInit {
   }
 
   handleOk = (e) => {
-    console.log('点击了确定');
     this.isVisible = false;
-    //console.log(this.role);
     this.submitForm();
-    // this.fired.emit({
-    //   userInfo: this.validateForm.value,
-    //   isEdit: this.isEdit
-    // });
+    // this.fired.emit();
   }
 
   handleCancel = (e) => {
-    console.log(e);
     this.isVisible = false;
   }
   ngOnInit() {
@@ -47,75 +42,71 @@ export class UsersPrivilegesComponent implements OnInit {
   }
   submitForm() {
     console.log(this.menus);
-    const userId = this.userInfo.userId,
-      menus = this.menus;
+    let userId = this.userInfo.userId,
+      roleIdArr = [],
+      roleIdStr;
 
-    // 获取勾选的所有角色id
-    let checkedArr = [];
-    this.menus.forEach((item, index) => {
-      if (item.checked) {
-        checkedArr.push(item.id);
-      }
-      item.children.forEach((subItem, index) => {
-        if (subItem.checked) {
-          checkedArr.push(subItem.id);
+    this.menus.forEach((parent, index) => {
+      parent['children'].forEach((child, index) => {
+        if (child.checked) {
+          roleIdArr.push(child.fId);
         }
       });
     });
-    console.log(checkedArr);
-    // this.usersPrivilegesService.updatePrivileges(userId, menus).subscribe(res => {
+    roleIdStr = roleIdArr.join(',');
 
-    // });
-  }
-  changeGrand(grand) {
-    const checked = grand.checked;
-    grand.children && grand.children.forEach((item, index) => {
-      item.checked = checked;
-      item.children && item.children.forEach((subItem, index) => {
-        subItem.checked = checked;
-      })
-    })
-
-    grand.checked = true;
-    grand.children && grand.children.forEach((item, index) => {
-      if (!item.checked) {
-        grand.checked = false;
+    this.usersPrivilegesService.addRoles(userId, roleIdStr).subscribe(res => {
+      if (res['success']) {
+        tools.tips('提示', '保存成功', 'success');
+        this.isVisible = false;
+      } else {
+        tools.tips('提示', '保存失败', 'error');
       }
-    })
-  }
-  changeChildren(grand, parent) {
-    parent.checked = true;
-    parent.children.forEach((item, index) => {
-      if (!item.checked) {
-        parent.checked = false;
-      }
-    })
-
-    grand.checked = true;
-    grand.children.forEach((item, index) => {
-      if (!item.checked) {
-        grand.checked = false;
-      }
-    })
-  }
-  changeParent(grand, parent) {
-    grand.checked = true;
-    grand.children && grand.children.forEach((item, index) => {
-      if (!item.checked) {
-        grand.checked = false;
-      }
-    })
-
-    console.log(parent.checked)
-    parent.children && parent.children.forEach((item, index) => {
-      item.checked = parent.checked;
-    })
-
+    });
   }
   getPrivileges(userId) {
     this.usersPrivilegesService.getPrivileges(userId).subscribe((res) => {
       this.menus = res.data;
+      // this.menus = this.menuMock.data;
     })
+  }
+  // 选中还是不选中
+  doCheck(parent, child) {
+    if (child) {
+      // childRadio changed
+      let checked = parent.children.some((child, index) => {
+        return child.checked;
+      })
+      parent.checked = checked;
+    } else {
+      // parentRadio changed
+      let checked = parent.checked;
+      parent.children.forEach((child, index) => {
+        child.checked = checked;
+      })
+    }
+  }
+
+  menuMock = {
+    "data":
+      [{
+        "id": 1, "fId": null, "dataId": "MM", "name": "数据中心监控管理", "checked": false, "type": null, "note": "0",
+        "children": [
+          { "id": 1, "fId": "111111", "dataId": "MM", "name": "系统管理1", "checked": true, "type": null, "note": null, "children": null, "url": null },
+          { "id": 1, "fId": "111112", "dataId": "MM", "name": "系统管理2", "checked": true, "type": null, "note": null, "children": null, "url": null },
+          { "id": 1, "fId": "111113", "dataId": "MM", "name": "系统管理3", "checked": true, "type": null, "note": null, "children": null, "url": null }
+        ],
+        "url": ""
+      },
+      {
+        "id": 2, "fId": null, "dataId": "YYH", "name": "医养护平台", "checked": false, "type": null, "note": "0",
+        "children": [
+          { "id": 1, "fId": "xxxxx1", "dataId": "MM", "name": "系统管理1", "checked": true, "type": null, "note": null, "children": null, "url": null },
+          { "id": 1, "fId": "xxxxx2", "dataId": "MM", "name": "系统管理2", "checked": true, "type": null, "note": null, "children": null, "url": null },
+          { "id": 1, "fId": "xxxxx3", "dataId": "MM", "name": "系统管理3", "checked": true, "type": null, "note": null, "children": null, "url": null }
+        ],
+        "url": null
+      }], "success": true
   }
   // allChecked = false;
   // indeterminate = true;

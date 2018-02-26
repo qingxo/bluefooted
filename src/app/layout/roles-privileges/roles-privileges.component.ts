@@ -27,7 +27,7 @@ export class RolesPrivilegesComponent implements OnInit {
     const x = { 'child': Array.of(p) };
     console.log(x);
     this.rolesPrivilegesService.saveRole(this.menus, this.roleId).subscribe((res) => {
-      if (res.success) {
+      if (res['success']) {
         swal('保存成功');
         this.isVisible = false;
       } else {

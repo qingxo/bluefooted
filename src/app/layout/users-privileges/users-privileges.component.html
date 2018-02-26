@@ -2,11 +2,11 @@
   (nzOnOk)="handleOk($event)" class="modal-users-privileges">
   <ng-template #modalContent>
     <div *ngFor="let item of menus;">
-      <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="changeGrand(item)">
-        <span>{{item.name}}</span>
-      </label>
+      <!-- <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="doCheck(item)"> -->
+      <span>{{item.name}}</span>
+      <!-- </label> -->
       <div class="parent" *ngFor="let subItem of item.children;">
-        <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="changeParent(item, subItem)">
+        <label nz-checkbox [(ngModel)]="subItem.checked" (ngModelChange)="doCheck(item, subItem)">
           <span>{{subItem.name}}</span>
         </label>
       </div>
