@@ -22,7 +22,6 @@ export class RolesPrivilegesComponent implements OnInit {
   }
 
   handleOk = (e) => {
-    // this.fired.emit();
     const p = Object.assign({}, this.menus.children);
     const x = { 'child': Array.of(p) };
     console.log(x);
@@ -31,7 +30,7 @@ export class RolesPrivilegesComponent implements OnInit {
         swal('保存成功');
         this.isVisible = false;
       } else {
-        swal('失败');
+        swal(res['errMsg'], '', 'error');
       }
 
     });

@@ -62,34 +62,13 @@ export class RolesComponent implements OnInit {
       });
     });
   }
-  // 添加、编辑提交表单
-  submitForm(roleInfo, isEdit) {
-    console.log(roleInfo, isEdit);
-    if (isEdit) {
-      // 编辑
-      this.rolesService.addRole(roleInfo).subscribe(res => {
-        tools.tips('提示', '编辑成功', 'success');
-        this.getRolesList();
-      });
-    } else {
-      // 添加
-      this.rolesService.addRole(roleInfo).subscribe(res => {
-        // 刷新列表
-        tools.tips('提示', '添加成功', 'success');
-        this.getRolesList();
-      });
-    }
 
-  }
   showModal(roleInfo) {
     const componentFatory = this.componentFactoryResolver.resolveComponentFactory(RolesAddComponent);
     const containerRef = this.viewContainerRef;
     containerRef.clear();
     const dd = <RolesAddComponent>containerRef.createComponent(componentFatory).instance;
     dd.initMoreInfo(roleInfo);
-    dd.fired.subscribe(res => {
-      this.submitForm(res.roleInfo, res.isEdit);
-    });
   }
   showPrivilegesModal(roleInfo) {
     const componentFatory = this.componentFactoryResolver.resolveComponentFactory(RolesPrivilegesComponent);
@@ -97,9 +76,5 @@ export class RolesComponent implements OnInit {
     containerRef.clear();
     const dd = <RolesPrivilegesComponent>containerRef.createComponent(componentFatory).instance;
     dd.initMoreInfo(roleInfo);
-    // dd.fired.subscribe((res) => {
-    //   this.moreInfo = res;
-    //   this.refreshList();
-    // });
   }
 }
