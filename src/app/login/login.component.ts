@@ -129,131 +129,130 @@ export class LoginComponent implements OnInit {
           "url": ""
         }
       ],
-      "url": ""
+      'url': ''
     },
     {
-      "id": 2,
-      "fId": null,
-      "dataId": "YYH",
-      "name": "医养护平台",
-      "checked": false,
-      "type": null,
-      "note": "0",
-      "children": [
+      'id': 2,
+      'fId': null,
+      'dataId': 'YYH',
+      'name': '医养护平台',
+      'checked': false,
+      'type': null,
+      'note': '0',
+      'children': [
         {
-          "id": null,
-          "fId": null,
-          "dataId": "PI",
-          "name": "患者档案",
-          "checked": true,
-          "type": null,
-          "note": "",
-          "children": [
+          'id': null,
+          'fId': null,
+          'dataId': 'PI',
+          'name': '患者档案',
+          'checked': true,
+          'type': null,
+          'note': '',
+          'children': [
             {
-              "id": null,
-              "fId": "INDE",
-              "dataId": "PI",
-              "name": "患者主索引",
-              "checked": false,
-              "type": null,
-              "note": "",
-              "children": [],
-              "url": "/person"
+              'id': null,
+              'fId': 'INDE',
+              'dataId': 'PI',
+              'name': '患者主索引',
+              'checked': false,
+              'type': null,
+              'note': '',
+              'children': [],
+              'url': '/person'
             },
             {
-              "id": null,
-              "fId": "MANA",
-              "dataId": "PI",
-              "name": "患者查询",
-              "checked": false,
-              "type": null,
-              "note": "",
-              "children": [],
-              "url": "/search"
+              'id': null,
+              'fId': 'MANA',
+              'dataId': 'PI',
+              'name': '患者查询',
+              'checked': false,
+              'type': null,
+              'note': '',
+              'children': [],
+              'url': '/search'
             }
           ],
-          "url": ""
+          'url': ''
         },
         {
-          "id": null,
-          "fId": null,
-          "dataId": "SG",
-          "name": "系统管理",
-          "checked": false,
-          "type": null,
-          "note": "",
-          "children": [
+          'id': null,
+          'fId': null,
+          'dataId': 'SG',
+          'name': '系统管理',
+          'checked': false,
+          'type': null,
+          'note': '',
+          'children': [
             {
-              "id": null,
-              "fId": "ROLE",
-              "dataId": "SG",
-              "name": "角色管理",
-              "checked": false,
-              "type": null,
-              "note": "",
-              "children": [
+              'id': null,
+              'fId': 'ROLE',
+              'dataId': 'SG',
+              'name': '角色管理',
+              'checked': false,
+              'type': null,
+              'note': '',
+              'children': [
                 {
-                  "id": null,
-                  "fId": null,
-                  "dataId": "ROLE",
-                  "name": "增加用户",
-                  "checked": false,
-                  "type": null,
-                  "note": null,
-                  "children": null,
-                  "url": null
+                  'id': null,
+                  'fId': null,
+                  'dataId': 'ROLE',
+                  'name': '增加用户',
+                  'checked': false,
+                  'type': null,
+                  'note': null,
+                  'children': null,
+                  'url': null
                 }
               ],
-              "url": "/roles"
+              'url': '/roles'
             },
             {
-              "id": null,
-              "fId": "USER",
-              "dataId": "SG",
-              "name": "用户管理",
-              "checked": false,
-              "type": null,
-              "note": "",
-              "children": [],
-              "url": "/users"
+              'id': null,
+              'fId': 'USER',
+              'dataId': 'SG',
+              'name': '用户管理',
+              'checked': false,
+              'type': null,
+              'note': '',
+              'children': [],
+              'url': '/users'
             }
           ],
-          "url": ""
+          'url': ''
         },
         {
-          "id": null,
-          "fId": null,
-          "dataId": "WK",
-          "name": "工作站",
-          "checked": false,
-          "type": null,
-          "note": "",
-          "children": [
+          'id': null,
+          'fId': null,
+          'dataId': 'WK',
+          'name': '工作站',
+          'checked': false,
+          'type': null,
+          'note': '',
+          'children': [
             {
-              "id": null,
-              "fId": "HOME",
-              "dataId": "WK",
-              "name": "我的首页",
-              "checked": false,
-              "type": null,
-              "note": "",
-              "children": [],
-              "url": "/index"
+              'id': null,
+              'fId': 'HOME',
+              'dataId': 'WK',
+              'name': '我的首页',
+              'checked': false,
+              'type': null,
+              'note': '',
+              'children': [],
+              'url': '/index'
             }
           ],
-          "url": ""
+          'url': ''
         }
       ],
-      "url": null
+      'url': null
     }
     ]
   };
   ngOnInit() {
   }
 
-
   loginConfirm() {
-    //this.router.navigate(['/']);
+    // this.router.navigate(['/']);
     this.initMenu();
   }
 
