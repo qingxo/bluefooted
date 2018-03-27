@@ -1,6 +1,5 @@
 // Load required modules
-var https = require("https");              // http server core module
-var fs = require('fs');
+var http = require("http");              // http server core module
 const path = require('path');
 var express = require("express");           // web framework external module
 const proxy = require('express-http-proxy');
@@ -43,12 +42,8 @@ app.get('*', function (req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
-console.log("the dirname:" + __dirname);
 // Start Express http server on port
-var webServer = https.createServer({
-  key: fs.readFileSync(path.join(__dirname, "/dist/assets/ssl/key.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "/dist/assets/ssl/certificate.pem"))
-}, app).listen(port);
+var webServer = http.createServer(app).listen(port);
 
 // Start Socket.io so it attaches itself to Express server
 var socketServer = socketIo.listen(webServer, { "log level": 1 });
@@ -90,5 +85,5 @@ var rtc = easyrtc.listen(app, socketServer, null, function (err, rtcRef) {
 
 //listen on port
 webServer.listen(port, function () {
-  console.log('listening on https://localhost:' + port);
+  console.log('listening on http://localhost:' + port);
 });

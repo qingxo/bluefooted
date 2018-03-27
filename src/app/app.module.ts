@@ -18,6 +18,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
 import { MobileMeetingComponent } from './mobile-meeting/mobile-meeting.component';
+import { VideoTalkComponent } from './video-talk/video-talk.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MobileMeetingComponent } from './mobile-meeting/mobile-meeting.componen
     AppComponent,
     NotFoundComponent,
     LoginComponent,
-    MobileMeetingComponent
+    MobileMeetingComponent,
+    VideoTalkComponent
   ],
   imports: [
     BrowserModule,

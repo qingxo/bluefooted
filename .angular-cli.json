@@ -22,7 +22,8 @@
         "styles.scss"
       ],
       "scripts": [
-        "./vendor/AgoraRTCSDK-2.0.0.js"
+        "./vendor/AgoraRTCSDK-2.0.0.js",
+        "./vendor/easyrtc.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
