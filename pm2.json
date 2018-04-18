@@ -1,5 +1,5 @@
 {
-  "name": "sleepCenter",
+  "name": "bluefooted",
   "script": "server.js",
   "env": {
     "NODE_ENV": "production"
@@ -7,6 +7,6 @@
   "error_file": "log/app-err.log",
   "out_file": "log/app-out.log",
   "exec_mode": "cluster",
-  "instances": 2,
+  "instances": 1,
   "log_date_format": "YYYY-MM-DD HH:mm Z"
 }
