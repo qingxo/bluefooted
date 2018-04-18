@@ -1,13 +1,12 @@
 <div class="wrapper-app">
   <header>
-    <h1>EasyRTC TypeScript with Angular 2</h1>
+    <h1>音视频聊天窗口</h1>
   </header>
   <div class="wrapper-content">
-    <h2>Simple Audio/Video Demo</h2>
     <div>
-      <strong>I am:</strong> {{myId}}</div>
+      <strong>我是:</strong> {{myId}}</div>
     <div class="connect-caller-buttons">
-      <h3>Connected Clients:</h3>
+      <h3>客户连接:</h3>
       <div id="otherClients">
         <button *ngFor="let easyrtcId of (connectedClientsList)" (click)="performCall(easyrtcId)">{{easyrtcId}}</button>
       </div>
@@ -21,7 +20,4 @@
       </div>
     </div>
   </div>
-  <footer>
-    <div>Copyright &copy; 2016 Skedans Systems Inc.</div>
-  </footer>
 </div>
