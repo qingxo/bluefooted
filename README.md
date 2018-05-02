@@ -1,27 +1,19 @@
 # Bluefooted
+音视频项目，主要用来医生与患者进行视频远程沟通、远程会诊使用。
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+#项目需要的环境支持
+1、node环境，7.10.1版本或以上
+2、pm2 插件，通过npm install -g pm2 安装
 
-## Development server
+#初始化项目
+npm install 或者 cnpm install
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# 启动开发模式下服务
 
-## Code scaffolding
+npm start 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#项目发布步骤
 
-## Build
+1、npm run build  
+2、pm2 start pm2.json
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

@@ -10,7 +10,7 @@ export class VideoTalkComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef) { }
 
-  myId: string = '';
+  myId = '';
   connectedClientsList: Array<string> = [];
 
   ngOnInit() {
@@ -22,8 +22,8 @@ export class VideoTalkComponent implements OnInit {
   }
 
   performCall(clientEasyrtcId: string): void {
-    let successCB = function (a: string, b: string): void { };
-    let failureCB = function (a: string, b: string): void { };
+    const successCB = function (a: string, b: string): void { };
+    const failureCB = function (a: string, b: string): void { };
     easyrtc.call(clientEasyrtcId, successCB, failureCB, undefined, undefined);
   }
 
@@ -35,7 +35,7 @@ export class VideoTalkComponent implements OnInit {
 
   convertListToButtons(roomName: string, data: any, isPrimary: boolean): void {
     this.clearConnectList();
-    for (let easyrtcid in data) {
+    for (const easyrtcid in data) {
       this.connectedClientsList.push(easyrtc.idToName(easyrtcid));
     }
     this.cdr.detectChanges();
@@ -55,12 +55,13 @@ export class VideoTalkComponent implements OnInit {
   }
 
   connect(): void {
-    easyrtc.setVideoDims(320, 240, undefined);
-    let convertListToButtonShim = (roomName: string, data: any, isPrimary: boolean): void => {
+    // easyrtc.setVideoDims(320, 240, undefined);
+    easyrtc.setVideoDims();
+    const convertListToButtonShim = (roomName: string, data: any, isPrimary: boolean): void => {
       this.convertListToButtons(roomName, data, isPrimary);
-    }
+    };
     easyrtc.setRoomOccupantListener(convertListToButtonShim);
-    easyrtc.easyApp("easyrtc.audioVideoSimple", "videoSelf", ["videoCaller"], this.loginSuccess.bind(this), this.loginFailure.bind(this));
+    easyrtc.easyApp('easyrtc.audioVideoSimple', 'videoSelf', ['videoCaller'], this.loginSuccess.bind(this), this.loginFailure.bind(this));
   }
 
   ngAfterViewInit() {
